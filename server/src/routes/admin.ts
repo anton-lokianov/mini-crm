@@ -6,6 +6,8 @@ import adminControllers from "../controllers/admin";
 
 const router = express.Router();
 
+const verify = [verifyToken, isAdmin];
+
 router.post(
   "/createSubUser",
   verifyToken,
@@ -14,6 +16,7 @@ router.post(
 );
 
 router.get("/getSubUsers", verifyToken, isAdmin, adminControllers.getSubUsers);
+
 router.delete(
   "/deleteSubUser/:id",
   verifyToken,

@@ -42,7 +42,7 @@ const SubUserCard = ({
 
   return (
     <div className="p-1">
-      <Card>
+      <Card className="">
         <CardContent className="flex flex-col items-start justify-start p-4 space-y-2">
           <h2 className="text-xl font-bold">
             {firstName} {lastName}
