@@ -11,8 +11,13 @@ interface ThemeStore {
 const getSystemTheme = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
+const getInitialTheme = (): Theme => {
+  const storedTheme = localStorage.getItem("ui-theme");
+  return (storedTheme as Theme) || "system";
+};
+
 const useThemeStore = create<ThemeStore>()((set) => ({
-  theme: "system",
+  theme: getInitialTheme(),
   setTheme: (theme) => set({ theme }),
 }));
 

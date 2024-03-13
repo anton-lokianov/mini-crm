@@ -9,7 +9,6 @@ export interface IUser extends Document {
   role: string;
   phone: string;
   company: string;
-  subUsers: Schema.Types.ObjectId[];
 }
 
 const userSchema = new Schema<IUser>(
@@ -38,7 +37,6 @@ const userSchema = new Schema<IUser>(
       default: "admin",
     },
     phone: { type: String, required: true, trim: true },
-    subUsers: [{ type: Schema.Types.ObjectId, ref: "SubUser" }],
   },
   { timestamps: true }
 );

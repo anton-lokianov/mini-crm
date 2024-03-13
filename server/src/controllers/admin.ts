@@ -3,8 +3,18 @@ import bcrypt from "bcrypt";
 
 import { AuthRequest } from "../types/authReq";
 import { SubUser } from "../models/subUser";
-import { BadRequestError, NotFoundError } from "../errors/errors";
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+} from "../errors/errors";
 import { User } from "../models/user";
+import { Client } from "../models/client";
+import { Driver } from "../models/driver";
+import { Notification } from "../models/notification";
+import { RoadCall } from "../models/roadCall";
+import { Shift } from "../models/shift";
+import { Message } from "../models/message";
 
 const createSubUser = async (
   req: AuthRequest,
@@ -22,6 +32,11 @@ const createSubUser = async (
 
     if (!user) {
       throw new NotFoundError("user not found");
+    }
+
+    const subUsersCount = await SubUser.countDocuments({ author: userId });
+    if (subUsersCount >= 5) {
+      throw new ForbiddenError("subUsers limit reached");
     }
 
     const existingUser = await SubUser.findOne({
@@ -56,7 +71,10 @@ const getSubUsers = async (
 ) => {
   try {
     const userId = req.user?.id;
-    const subUsers = await SubUser.find({ author: userId });
+    const subUsers = await SubUser.find(
+      { author: userId },
+      "-password -author -company -__v -updatedAt -phone"
+    );
 
     if (!subUsers) {
       throw new NotFoundError("subUsers not found");
@@ -75,10 +93,10 @@ const deleteSubUser = async (
 ) => {
   try {
     const userId = req.user?.id;
-    const { subUserId } = req.params;
+    const { id } = req.params;
 
     const subUser = await SubUser.findOneAndDelete({
-      _id: subUserId,
+      _id: id,
       author: userId,
     });
 
@@ -92,4 +110,31 @@ const deleteSubUser = async (
   }
 };
 
-export default { createSubUser, getSubUsers, deleteSubUser };
+const deleteAuthorUser = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.user?.id;
+
+    await Promise.all([
+      SubUser.deleteMany({ author: userId }),
+      Client.deleteMany({ user: userId }),
+      Driver.deleteMany({ author: userId }),
+      Notification.deleteMany({ author: userId }),
+      RoadCall.deleteMany({ author: userId }),
+      Shift.deleteMany({ author: userId }),
+      Message.deleteMany({ sender: userId }),
+      User.findOneAndDelete({ _id: userId }),
+    ]);
+
+    res
+      .status(200)
+      .json({ message: "User and all related entities deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { createSubUser, getSubUsers, deleteSubUser, deleteAuthorUser };

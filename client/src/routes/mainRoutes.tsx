@@ -1,3 +1,4 @@
+import AdminLayout from "@/components/layout/adminLayout";
 import AuthLayout from "@/components/layout/authLayout";
 import RootLayout from "@/components/layout/rootLayout";
 import Dashboard from "@/pages/dashboard";
@@ -16,7 +17,9 @@ const MainRoutes = () => {
         </Route>
         <Route element={<AuthLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/user/settings" element={<UserSettings />} />
+          <Route element={<AdminLayout />}>
+            <Route path="/user/settings" element={<UserSettings />} />
+          </Route>
         </Route>
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>

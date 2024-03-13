@@ -21,4 +21,11 @@ router.delete(
   adminControllers.deleteSubUser
 );
 
+router.delete(
+  "/deleteAuthorUser",
+  verifyToken,
+  isAdmin,
+  adminControllers.deleteAuthorUser
+);
+
 export default router;

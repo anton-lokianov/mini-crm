@@ -43,7 +43,11 @@ const formSchema = z.object({
 });
 
 const UserSettingsForm = () => {
-  const { mutate: create, isPending, isSuccess } = useCreateSubUserMutation();
+  const {
+    mutateAsync: create,
+    isPending,
+    isSuccess,
+  } = useCreateSubUserMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,9 +62,11 @@ const UserSettingsForm = () => {
   });
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
-    await create(data);
-    if (isSuccess) {
+    try {
+      await create(data);
       form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -68,8 +74,7 @@ const UserSettingsForm = () => {
     <Form {...form}>
       <form
         className="grid grid-cols-2 gap-4 w-full"
-        onSubmit={form.handleSubmit(handleSubmit)}
-      >
+        onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
           control={form.control}
           name="firstName"
@@ -215,29 +220,27 @@ const UserSettingsForm = () => {
                 <ToggleGroup
                   type="single"
                   className="gap-4"
-                  onValueChange={(value) => form.setValue("role", value)}
-                >
+                  onValueChange={(value: string) =>
+                    form.setValue("role", value)
+                  }>
                   <ToggleGroupItem
                     value="operator"
                     size="xl"
-                    className="flex flex-col gap-1"
-                  >
+                    className="flex flex-col gap-1">
                     <Wrench className="text-primary h-8 w-8" />
                     Operator
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="manager"
                     size="xl"
-                    className="flex flex-col gap-1"
-                  >
+                    className="flex flex-col gap-1">
                     <Key className="text-primary h-8 w-8" />
                     Manager
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="service"
                     size="xl"
-                    className="flex flex-col gap-1"
-                  >
+                    className="flex flex-col gap-1">
                     <PhoneCall className="text-primary h-8 w-8" /> Service
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -252,8 +255,7 @@ const UserSettingsForm = () => {
         <Button
           type="submit"
           className="col-span-2 uppercase"
-          disabled={isPending}
-        >
+          disabled={isPending}>
           {isPending ? "Loading..." : "Create Sub User"}
         </Button>
       </form>
