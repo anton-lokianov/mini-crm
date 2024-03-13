@@ -25,7 +25,7 @@ export const signIn = async (
     } else {
       const subUser = await SubUser.findOne({
         userName: userName,
-      }).populate("user");
+      }).populate("author");
 
       if (subUser) {
         userId = (subUser.author as any)._id;
