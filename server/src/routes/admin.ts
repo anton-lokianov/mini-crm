@@ -1,0 +1,24 @@
+import express from "express";
+
+import { isAdmin } from "../middlewares/adminAuth";
+import { verifyToken } from "../middlewares/verifyToken";
+import adminControllers from "../controllers/admin";
+
+const router = express.Router();
+
+router.post(
+  "/createSubUser",
+  verifyToken,
+  isAdmin,
+  adminControllers.createSubUser
+);
+
+router.get("/getSubUsers", verifyToken, isAdmin, adminControllers.getSubUsers);
+router.delete(
+  "/deleteSubUser/:id",
+  verifyToken,
+  isAdmin,
+  adminControllers.deleteSubUser
+);
+
+export default router;
