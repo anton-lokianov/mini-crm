@@ -4,6 +4,7 @@ import RootLayout from "@/components/layout/rootLayout";
 import Dashboard from "@/pages/dashboard";
 import Home from "@/pages/home";
 import { Login } from "@/pages/login";
+import Page404 from "@/pages/page404";
 import UserSettings from "@/pages/userSettings";
 import { Route, Routes } from "react-router-dom";
 
@@ -21,7 +22,7 @@ const MainRoutes = () => {
             <Route path="/user/settings" element={<UserSettings />} />
           </Route>
         </Route>
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </main>
   );

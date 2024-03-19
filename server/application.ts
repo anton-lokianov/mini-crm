@@ -41,7 +41,7 @@ class App {
 
   private initialRoutes(): void {
     this.app.use("/api/auth", authRouter);
-    this.app.use("/api/admin",[], adminRouter);
+    this.app.use("/api/admin", adminRouter);
   }
 
   private initializeErrorHandling(): void {

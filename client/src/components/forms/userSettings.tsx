@@ -43,11 +43,7 @@ const formSchema = z.object({
 });
 
 const UserSettingsForm = () => {
-  const {
-    mutateAsync: create,
-    isPending,
-    isSuccess,
-  } = useCreateSubUserMutation();
+  const { mutateAsync: createSubUser, isPending } = useCreateSubUserMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,7 +59,7 @@ const UserSettingsForm = () => {
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      await create(data);
+      await createSubUser(data);
       form.reset();
     } catch (error) {
       console.error("Error submitting form:", error);
