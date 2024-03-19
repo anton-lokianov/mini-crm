@@ -1,4 +1,4 @@
-import { useGetSubUsersQuery } from "@/service/react-query/querys";
+import { useGetSubUsersQuery } from "@/service/react-query/queries";
 import React from "react";
 import SubUserCard from "./subUserCard";
 import {
