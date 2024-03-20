@@ -1,8 +1,9 @@
-import { useAuthStore } from "@/service/store/auth-store";
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-const RootLayout = () => {
+import { useAuthStore } from "@/service/store/auth-store";
+
+const RootRoutes = () => {
   const { user, token } = useAuthStore((state) => state);
 
   return (
@@ -16,4 +17,4 @@ const RootLayout = () => {
   );
 };
 
-export default RootLayout;
+export default RootRoutes;

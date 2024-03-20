@@ -15,7 +15,7 @@ export const signIn = async ({
     });
 
     if (response.status !== 200) {
-      throw new Error("something went wrong.");
+      throw new Error("something went wrong. with sign in.");
     }
 
     if (!response?.data?.user || !response?.data?.token) {
@@ -38,7 +38,7 @@ export const createSubUser = async (
     });
 
     if (response.status !== 201) {
-      throw new Error("something went wrong.");
+      throw new Error("something went wrong with creating sub user");
     }
 
     return response.data;
@@ -53,7 +53,7 @@ export const getSubUsers = async (): Promise<SubUser[]> => {
     const response = await api.get("/admin/getSubUsers");
 
     if (response.status !== 200) {
-      throw new Error("something went wrong.");
+      throw new Error("something went wrong with getting sub users.");
     }
 
     return response.data;
@@ -68,7 +68,7 @@ export const deleteAuthorUser = async (): Promise<{ message: string }> => {
     const response = await api.delete("/admin/deleteAuthorUser");
 
     if (response.status !== 200) {
-      throw new Error("something went wrong.");
+      throw new Error("something went wrong. with deleting author user.");
     }
 
     return response.data;
@@ -85,7 +85,7 @@ export const deleteSubUser = async (
     const response = await api.delete(`/admin/deleteSubUser/${subUserId}`);
 
     if (response.status !== 200) {
-      throw new Error("something went wrong.");
+      throw new Error("something went wrong. with deleting sub user.");
     }
 
     return response.data;

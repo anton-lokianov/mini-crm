@@ -1,9 +1,10 @@
-import { useAuthStore } from "@/service/store/auth-store";
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import Sidebar from "../sidebar/siderbar";
 
-const AuthLayout = () => {
+import { useAuthStore } from "@/service/store/auth-store";
+import Sidebar from "../components/sidebar/siderbar";
+
+const AuthRoutes = () => {
   const { user, token } = useAuthStore((state) => state);
   return (
     <>
@@ -19,4 +20,4 @@ const AuthLayout = () => {
   );
 };
 
-export default AuthLayout;
+export default AuthRoutes;

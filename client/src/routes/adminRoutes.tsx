@@ -1,7 +1,8 @@
-import { useAuthStore } from "@/service/store/auth-store";
 import { Navigate, Outlet } from "react-router-dom";
 
-const AdminLayout = () => {
+import { useAuthStore } from "@/service/store/auth-store";
+
+const AdminRoutes = () => {
   const user = useAuthStore((state) => state.user);
 
   return (
@@ -15,4 +16,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default AdminRoutes;

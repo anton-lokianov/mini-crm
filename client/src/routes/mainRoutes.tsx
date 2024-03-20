@@ -1,24 +1,25 @@
-import AdminLayout from "@/components/layout/adminLayout";
-import AuthLayout from "@/components/layout/authLayout";
-import RootLayout from "@/components/layout/rootLayout";
+import { Route, Routes } from "react-router-dom";
+
 import Dashboard from "@/pages/dashboard";
 import Home from "@/pages/home";
 import { Login } from "@/pages/login";
 import Page404 from "@/pages/page404";
 import UserSettings from "@/pages/userSettings";
-import { Route, Routes } from "react-router-dom";
+import RootRoutes from "@/routes/rootRoutes";
+import AuthRoutes from "./authRoutes";
+import AdminRoutes from "./adminRoutes";
 
 const MainRoutes = () => {
   return (
     <main className="h-screen">
       <Routes>
-        <Route element={<RootLayout />}>
+        <Route element={<RootRoutes />}>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
         </Route>
-        <Route element={<AuthLayout />}>
+        <Route element={<AuthRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route element={<AdminLayout />}>
+          <Route element={<AdminRoutes />}>
             <Route path="/user/settings" element={<UserSettings />} />
           </Route>
         </Route>

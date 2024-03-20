@@ -11,7 +11,7 @@ import {
 import LoadingSpinner from "../global/loadingSpinner";
 
 const SubUserList = () => {
-  const { data, isPending, isError } = useGetSubUsersQuery();
+  const { data: subUser, isPending, isError } = useGetSubUsersQuery();
 
   if (isPending) {
     return <LoadingSpinner />;
@@ -23,12 +23,12 @@ const SubUserList = () => {
 
   return (
     <>
-      {!data.length ? (
+      {!subUser.length ? (
         <div>No sub users</div>
       ) : (
         <Carousel className="max-w-sm w-full">
           <CarouselContent>
-            {data?.map((user) => (
+            {subUser.map((user) => (
               <CarouselItem key={user._id}>
                 <SubUserCard {...user} />
               </CarouselItem>
