@@ -35,7 +35,7 @@ const createSubUser = async (
     }
 
     const subUsersCount = await SubUser.countDocuments({ author: userId });
-    if (subUsersCount >= 5) {
+    if (subUsersCount > 5) {
       throw new ForbiddenError("subUsers limit reached");
     }
 

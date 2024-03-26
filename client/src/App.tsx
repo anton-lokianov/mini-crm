@@ -14,11 +14,9 @@ const App = () => {
 
   return (
     <>
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
-        <Header />
-        <MainRoutes />
-        <Toaster richColors />
-      </ErrorBoundary>
+      <Header />
+      <MainRoutes />
+      <Toaster richColors />
     </>
   );
 };

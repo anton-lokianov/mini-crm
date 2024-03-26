@@ -44,10 +44,11 @@ const SignIn = () => {
 
   return (
     <Form {...form}>
-      <Card className="flex p-6 justify-center max-w-xl w-full">
+      <div className="flex p-6 justify-center max-w-xl w-full">
         <form
           className="space-y-4 w-full"
-          onSubmit={form.handleSubmit(handleSubmit)}>
+          onSubmit={form.handleSubmit(handleSubmit)}
+        >
           <FormField
             control={form.control}
             name="userName"
@@ -92,7 +93,7 @@ const SignIn = () => {
             </FormDescription>
           </div>
         </form>
-      </Card>
+      </div>
     </Form>
   );
 };

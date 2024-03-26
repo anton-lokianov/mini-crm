@@ -11,6 +11,8 @@ interface IDriver extends Document {
   employeeType: string;
   driverNumber: number;
   author: Schema.Types.ObjectId;
+  shiftStartTime: string;
+  shiftEndTime: string;
 }
 
 const driverSchema = new Schema<IDriver>(
@@ -30,6 +32,8 @@ const driverSchema = new Schema<IDriver>(
       default: "tow-driver",
     },
     driverNumber: { type: Number, required: true },
+    shiftStartTime: { type: String, required: true },
+    shiftEndTime: { type: String, required: true },
   },
   { timestamps: true }
 );

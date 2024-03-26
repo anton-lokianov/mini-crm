@@ -3,9 +3,10 @@ import React from "react";
 type Props = {
   children: React.ReactNode;
   fallback: React.ReactNode;
+  hasError: boolean;
 };
 
-class ErrorBoundary extends React.Component<Props, { hasError: boolean }> {
+class ErrorBoundary extends React.Component<Props> {
   state = { hasError: false };
 
   static getDerivedStateFromError(error: any) {

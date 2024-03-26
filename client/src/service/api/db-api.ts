@@ -15,17 +15,26 @@ export const signIn = async ({
     });
 
     if (response.status !== 200) {
-      throw new Error("something went wrong. with sign in.");
+      console.error(
+        `signIn failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`SignIn failed: ${response.statusText}`);
     }
 
-    if (!response?.data?.user || !response?.data?.token) {
-      throw new Error("Invalid response from server.");
+    if (!response.data?.user || !response.data?.token) {
+      console.error("signIn: Missing user or token in the response data");
+      throw new Error("SignIn failed: Server returned an incomplete response.");
     }
 
     return response.data;
   } catch (error) {
-    console.error("signIn", error);
-    throw error;
+    if (error instanceof Error) {
+      console.error("signIn error: ", error.message);
+      throw new Error(`SignIn failed: ${error.message}`);
+    } else {
+      console.error("signIn error: Unknown error");
+      throw new Error("SignIn failed: An unknown error occurred.");
+    }
   }
 };
 
@@ -38,13 +47,21 @@ export const createSubUser = async (
     });
 
     if (response.status !== 201) {
-      throw new Error("something went wrong with creating sub user");
+      console.error(
+        `createSubUser failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to create sub user: ${response.statusText}`);
     }
 
     return response.data;
   } catch (error) {
-    console.error("createSubUser", error);
-    throw error;
+    if (error instanceof Error) {
+      console.error("createSubUser error: ", error.message);
+      throw new Error(`Failed to create sub user: ${error.message}`);
+    } else {
+      console.error("createSubUser error: Unknown error");
+      throw new Error("Failed to create sub user: An unknown error occurred.");
+    }
   }
 };
 
@@ -53,13 +70,21 @@ export const getSubUsers = async (): Promise<SubUser[]> => {
     const response = await api.get("/admin/getSubUsers");
 
     if (response.status !== 200) {
-      throw new Error("something went wrong with getting sub users.");
+      console.error(
+        `getSubUsers failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to get sub users: ${response.statusText}`);
     }
 
     return response.data;
   } catch (error) {
-    console.error("getSubUsers", error);
-    throw error;
+    if (error instanceof Error) {
+      console.error("getSubUsers error: ", error.message);
+      throw new Error(`Failed to get sub users: ${error.message}`);
+    } else {
+      console.error("getSubUsers error: Unknown error");
+      throw new Error("Failed to get sub users: An unknown error occurred.");
+    }
   }
 };
 
@@ -68,13 +93,23 @@ export const deleteAuthorUser = async (): Promise<{ message: string }> => {
     const response = await api.delete("/admin/deleteAuthorUser");
 
     if (response.status !== 200) {
-      throw new Error("something went wrong. with deleting author user.");
+      console.error(
+        `deleteAuthorUser failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to delete author user: ${response.statusText}`);
     }
 
     return response.data;
   } catch (error) {
-    console.error("deleteAuthorUser", error);
-    throw error;
+    if (error instanceof Error) {
+      console.error("deleteAuthorUser error: ", error.message);
+      throw new Error(`Failed to delete author user: ${error.message}`);
+    } else {
+      console.error("deleteAuthorUser error: Unknown error");
+      throw new Error(
+        "Failed to delete author user: An unknown error occurred."
+      );
+    }
   }
 };
 
@@ -85,12 +120,20 @@ export const deleteSubUser = async (
     const response = await api.delete(`/admin/deleteSubUser/${subUserId}`);
 
     if (response.status !== 200) {
-      throw new Error("something went wrong. with deleting sub user.");
+      console.error(
+        `deleteSubUser failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to delete sub user: ${response.statusText}`);
     }
 
     return response.data;
   } catch (error) {
-    console.error("deleteSubUser", error);
-    throw error;
+    if (error instanceof Error) {
+      console.error("deleteSubUser error: ", error.message);
+      throw new Error(`Failed to delete sub user: ${error.message}`);
+    } else {
+      console.error("deleteSubUser error: Unknown error");
+      throw new Error("Failed to delete sub user: An unknown error occurred.");
+    }
   }
 };
