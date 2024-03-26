@@ -11,14 +11,14 @@ import { useAuthStore } from "@/service/store/auth-store";
 import { Button } from "@/components/ui/button";
 import SubUserList from "@/components/subUser/subUserList";
 import DeleteUserAlert from "@/components/dialogs/deleteUserAlert";
+import EditUserDialog from "@/components/dialogs/editUserDialog";
 
 const UserSettings = () => {
   const user = useAuthStore((state) => state.user);
-  const [dangerZone, setDangerZone] = useState(false);
 
   return (
     <section className="p-4 max-w-3xl w-full mx-auto">
-      <Card className="p-3">
+      <Card className="p-3 relative">
         <CardHeader className="text-center">
           <CardTitle className="text-primary">User Settings</CardTitle>
           <CardDescription>
@@ -41,6 +41,7 @@ const UserSettings = () => {
         </div>
         <CardContent>
           <UserSettingsForm />
+          <EditUserDialog />
         </CardContent>
         <Card className="border-red-500 rounded">
           <CardHeader className="text-center">

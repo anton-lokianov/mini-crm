@@ -3,6 +3,7 @@ import ModeToggle from "../global/modeToggle";
 import UserDetails from "./userDetails";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "@/service/store/auth-store";
+import Sidebar from "../sidebar/siderbar";
 
 const Header = () => {
   const location = useLocation();
@@ -10,7 +11,7 @@ const Header = () => {
   const { user, token } = useAuthStore((state) => state);
 
   return (
-    <header className="flex justify-between items-center h-20 px-8 border-b-[1px]">
+    <header className="flex justify-between items-center h-20 px-11 border-b-[1px] relative">
       <div className="flex items-center">
         <img src="/logo.png" width={80} height={80} alt="logo" />
       </div>
@@ -18,7 +19,8 @@ const Header = () => {
         {!token && !user && (
           <Link
             className="bg-primary px-6 py-[6px] rounded hover:bg-primary/70 tracking-wider text-white"
-            to={currentPath ? "/login" : "/"}>
+            to={currentPath ? "/login" : "/"}
+          >
             {currentPath ? "LOGIN" : "HOME"}
           </Link>
         )}
@@ -27,7 +29,12 @@ const Header = () => {
             {user.company}
           </h2>
         )}
-        {token && user && <UserDetails {...user} />}
+        {token && user && (
+          <>
+            <Sidebar />
+            <UserDetails {...user} />
+          </>
+        )}
         <ModeToggle />
       </div>
     </header>

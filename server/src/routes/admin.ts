@@ -8,27 +8,14 @@ const router = express.Router();
 
 const verify = [verifyToken, isAdmin];
 
-router.post(
-  "/createSubUser",
-  verifyToken,
-  isAdmin,
-  adminControllers.createSubUser
-);
+router.post("/createSubUser", verify, adminControllers.createSubUser);
 
-router.get("/getSubUsers", verifyToken, isAdmin, adminControllers.getSubUsers);
+router.get("/getSubUsers", verify, adminControllers.getSubUsers);
 
-router.delete(
-  "/deleteSubUser/:id",
-  verifyToken,
-  isAdmin,
-  adminControllers.deleteSubUser
-);
+router.get("/getAuthUser", verify, adminControllers.getAuthUser);
 
-router.delete(
-  "/deleteAuthorUser",
-  verifyToken,
-  isAdmin,
-  adminControllers.deleteAuthorUser
-);
+router.delete("/deleteSubUser/:id", verify, adminControllers.deleteSubUser);
+
+router.delete("/deleteAuthorUser", verify, adminControllers.deleteAuthorUser);
 
 export default router;

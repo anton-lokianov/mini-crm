@@ -33,7 +33,8 @@ const DeleteUserAlert = () => {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-red-500 hover:bg-red-500/90"
-            onClick={() => deleteUser()}>
+            onClick={() => deleteUser()}
+          >
             {isPending ? "Deleting..." : "Continue"}
           </AlertDialogAction>
         </AlertDialogFooter>

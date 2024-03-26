@@ -1,5 +1,5 @@
 import { api } from "./apiConfig";
-import { SignInResponse, SubUser } from "@/lib/types/globalTypes";
+import { SignInResponse, User } from "@/lib/types/globalTypes";
 
 export const signIn = async ({
   userName,
@@ -65,7 +65,7 @@ export const createSubUser = async (
   }
 };
 
-export const getSubUsers = async (): Promise<SubUser[]> => {
+export const getSubUsers = async (): Promise<Partial<User[]>> => {
   try {
     const response = await api.get("/admin/getSubUsers");
 
@@ -134,6 +134,29 @@ export const deleteSubUser = async (
     } else {
       console.error("deleteSubUser error: Unknown error");
       throw new Error("Failed to delete sub user: An unknown error occurred.");
+    }
+  }
+};
+
+export const getAuthUser = async (): Promise<Partial<User>> => {
+  try {
+    const response = await api.get("/admin/getAuthUser");
+
+    if (response.status !== 200) {
+      console.error(
+        `getAuthUser failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to get auth user: ${response.statusText}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("getAuthUser error: ", error.message);
+      throw new Error(`Failed to get auth user: ${error.message}`);
+    } else {
+      console.error("getAuthUser error: Unknown error");
+      throw new Error("Failed to get auth user: An unknown error occurred.");
     }
   }
 };

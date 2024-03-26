@@ -137,4 +137,34 @@ const deleteAuthorUser = async (
   }
 };
 
-export default { createSubUser, getSubUsers, deleteSubUser, deleteAuthorUser };
+const getAuthUser = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.user?.id;
+    const user = await User.findById(
+      {
+        _id: userId,
+      },
+      "-role -password -__v -updatedAt -_id"
+    );
+
+    if (!user) {
+      throw new NotFoundError("user not found");
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default {
+  createSubUser,
+  getSubUsers,
+  deleteSubUser,
+  deleteAuthorUser,
+  getAuthUser,
+};

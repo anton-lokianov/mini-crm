@@ -12,12 +12,14 @@ export type SignInResponse = {
   exertionDate: string;
 };
 
-export interface SubUser {
+export interface User {
   _id: string;
   firstName: string;
   lastName: string;
   role: string;
   email: string;
   createdAt: string;
+  phone: string;
   userName: string;
+  company: string;
 }
