@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import helmet from "helmet";
+import http from "http";
+import { Server as SocketIOServer } from "socket.io";
 
 import { errorMiddleware } from "./src/middlewares/errorHandler";
 import { logger } from "./src/middlewares/logger";
@@ -13,9 +15,18 @@ dotenv.config();
 
 class App {
   public app: Application;
+  private server: http.Server;
+  public io: SocketIOServer;
 
   constructor() {
     this.app = express();
+    this.server = http.createServer(this.app);
+    this.io = new SocketIOServer(this.server, {
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+      },
+    });
     this.initializeMiddlewares();
     this.initialRoutes();
     this.initializeErrorHandling();
@@ -66,7 +77,7 @@ class App {
 
   private listen(): void {
     const PORT = process.env.PORT || 5000;
-    this.app.listen(PORT, () => {
+    this.server.listen(PORT, () => {
       console.log(`Server running on port: ${PORT}`);
     });
   }
