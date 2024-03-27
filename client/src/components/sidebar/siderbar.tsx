@@ -33,17 +33,16 @@ const SideBarLinks = () => {
   const location = useLocation();
 
   return (
-    <nav className="flex flex-col gap-2 mt-8">
+    <nav className="flex flex-col gap-2 mt-14">
       {navLinks.map((link) => (
         <div
           className={cn(
-            "flex items-center ml-3 gap-2 py-1 px-3 rounded-l-full relative",
+            "flex items-center ml-4 gap-2 py-1 px-3 rounded-l-full relative",
             {
               "bg-gradient-to-r from-primary to-red-500 navLink":
                 location.pathname.startsWith(link.path),
             }
-          )}
-        >
+          )}>
           <span></span>
           <Link to={link.path} className="text-lg">
             {link.title}

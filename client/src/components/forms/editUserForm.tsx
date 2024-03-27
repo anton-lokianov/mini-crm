@@ -18,19 +18,30 @@ import { useGetAuthUserQuery } from "@/service/react-query/queries";
 const formSchema = z.object({
   userName: z
     .string()
+    .trim()
     .min(3, { message: "UserName must be at least 3 characters" }),
   firstName: z
     .string()
+    .trim()
     .min(2, { message: "First name must be at least 2 characters" }),
   lastName: z
     .string()
+    .trim()
     .min(2, { message: "Last name must be at least 2 characters" }),
-  email: z.string().email({ message: "Invalid email" }),
-  phone: z.string().min(10, { message: "Invalid phone number" }),
+  email: z.string().trim().email({ message: "Invalid email" }),
+  phone: z.string().trim().min(10, { message: "Invalid phone number" }),
   company: z
     .string()
+    .trim()
     .min(2, { message: "Company name must be at least 2 characters" }),
-  password: z.optional(z.string()),
+  password: z
+    .string()
+    .trim()
+    .min(6, { message: "Password must be at least 6 characters" }),
+  newPassword: z
+    .string()
+    .trim()
+    .min(6, { message: "New password must be at least 6 characters" }),
 });
 
 const EditUserForm = () => {
@@ -52,6 +63,7 @@ const EditUserForm = () => {
         phone: getUserDetails.phone,
         company: getUserDetails.company,
         password: "",
+        newPassword: "",
       });
     }
   }, [getUserDetails, form.reset]);
@@ -62,8 +74,7 @@ const EditUserForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="grid grid-cols-2 gap-3"
-      >
+        className="grid grid-cols-2 gap-3">
         <FormField
           control={form.control}
           name="firstName"
@@ -127,9 +138,23 @@ const EditUserForm = () => {
             <FormItem className="col-span-2">
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} type="password" />
               </FormControl>
-              <FormDescription>Edit your password here.</FormDescription>
+              <FormDescription>Enter your old password here.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="newPassword"
+          render={({ field }) => (
+            <FormItem className="col-span-2">
+              <FormLabel>New password</FormLabel>
+              <FormControl>
+                <Input {...field} type="password" />
+              </FormControl>
+              <FormDescription>Enter your new password here.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

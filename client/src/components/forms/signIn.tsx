@@ -18,10 +18,8 @@ import { Card } from "../ui/card";
 import { useSignInMutation } from "@/service/react-query/mutations";
 
 const formSchema = z.object({
-  userName: z
-    .string()
-    .min(3, { message: "UserName must be at least 3 characters" }),
-  password: z.string().min(1, { message: "Password cant be empty" }),
+  userName: z.string().trim().min(1, { message: "Username cant be empty" }),
+  password: z.string().trim().min(1, { message: "Password cant be empty" }),
 });
 
 const SignIn = () => {
@@ -47,8 +45,7 @@ const SignIn = () => {
       <div className="flex p-6 justify-center max-w-xl w-full">
         <form
           className="space-y-4 w-full"
-          onSubmit={form.handleSubmit(handleSubmit)}
-        >
+          onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
             control={form.control}
             name="userName"
