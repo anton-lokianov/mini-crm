@@ -19,18 +19,15 @@ const Header = () => {
         {!token && !user && (
           <Link
             className="bg-primary px-6 py-[6px] rounded hover:bg-primary/70 tracking-wider text-white"
-            to={currentPath ? "/login" : "/"}
-          >
+            to={currentPath ? "/login" : "/"}>
             {currentPath ? "LOGIN" : "HOME"}
           </Link>
         )}
         {token && user && (
-          <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-primary to-red-500">
-            {user.company}
-          </h2>
-        )}
-        {token && user && (
           <>
+            <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-primary to-red-500">
+              {user.company}
+            </h2>
             <Sidebar />
             <UserDetails {...user} />
           </>
