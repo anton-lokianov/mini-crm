@@ -16,24 +16,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card } from "../ui/card";
 import { useSignInMutation } from "@/service/react-query/mutations";
-
-const formSchema = z.object({
-  userName: z.string().trim().min(1, { message: "Username cant be empty" }),
-  password: z.string().trim().min(1, { message: "Password cant be empty" }),
-});
+import { signInSchema } from "@/validations/formValidations";
 
 const SignIn = () => {
   const { mutate: signIn, isPending } = useSignInMutation();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       userName: "",
       password: "",
     },
   });
 
-  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (data: z.infer<typeof signInSchema>) => {
     await signIn({
       userName: data.userName,
       password: data.password,

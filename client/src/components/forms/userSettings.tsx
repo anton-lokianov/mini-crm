@@ -23,33 +23,12 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Button } from "../ui/button";
 import { useCreateSubUserMutation } from "@/service/react-query/mutations";
-
-const formSchema = z.object({
-  userName: z
-    .string()
-    .trim()
-    .min(3, { message: "UserName must be at least 3 characters" }),
-  password: z
-    .string()
-    .trim()
-    .min(6, { message: "Password must be at least 6 characters" }),
-  firstName: z
-    .string()
-    .trim()
-    .min(2, { message: "First name must be at least 2 characters" }),
-  lastName: z
-    .string()
-    .trim()
-    .min(2, { message: "Last name must be at least 2 characters" }),
-  email: z.string().trim().email({ message: "Invalid email" }),
-  phone: z.string().min(10, { message: "Invalid phone number" }),
-  role: z.string().min(1, { message: "Must pick a role" }),
-});
+import { subUserSchema } from "@/validations/formValidations";
 
 const UserSettingsForm = () => {
   const { mutateAsync: createSubUser, isPending } = useCreateSubUserMutation();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof subUserSchema>>({
+    resolver: zodResolver(subUserSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -61,7 +40,7 @@ const UserSettingsForm = () => {
     },
   });
 
-  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (data: z.infer<typeof subUserSchema>) => {
     try {
       await createSubUser(data);
       form.reset();
