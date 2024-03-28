@@ -19,7 +19,7 @@ const Sidebar = (props: Props) => {
       <SheetTrigger className="absolute left-6 cursor-pointer" asChild>
         <Menu />
       </SheetTrigger>
-      <SheetContent side="left" className="w-[16rem] px-0">
+      <SheetContent side="left" className="w-[17rem] px-0">
         <SheetHeader>
           <SheetTitle className="text-center">Navigation Menu</SheetTitle>
         </SheetHeader>
@@ -37,13 +37,13 @@ const SideBarLinks = () => {
       {navLinks.map((link) => (
         <div
           className={cn(
-            "flex items-center ml-4 gap-2 py-1 px-3 rounded-l-full relative",
+            "flex items-center ml-4 gap-2 py-1 px-4 rounded-l-full relative",
             {
               "bg-gradient-to-r from-primary to-red-500 navLink":
                 location.pathname.startsWith(link.path),
             }
           )}>
-          <span></span>
+          <span>{link.icon}</span>
           <Link to={link.path} className="text-lg">
             {link.title}
           </Link>

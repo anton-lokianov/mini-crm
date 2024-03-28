@@ -99,3 +99,24 @@ B (255 */
     transform: scale(1);
   }
 }
+
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+  height: 10px; /* Height of the scrollbar (for horizontal scrollbars) */
+}
+
+/* This styles the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 10px; /* Roundness of the thumb */
+}
+
+/* This styles the scrollbar thumb when it's hovered or active */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when the thumb is hovered */
+}
+
+/* This styles the scrollbar corner (where horizontal and vertical scrollbars meet) */
+::-webkit-scrollbar-corner {
+  background: #ededed; /* Color of the scrollbar corner */
+}

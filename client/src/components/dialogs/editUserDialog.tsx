@@ -26,7 +26,7 @@ const EditUserDialog = () => {
           Edit user
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-lg w-full h-[calc(100%-50px)] overflow-auto">
+      <DialogContent className="max-w-lg w-full h-[calc(100%-100px)] overflow-auto">
         <DialogHeader>
           <DialogTitle>Edit user</DialogTitle>
           <DialogDescription>

@@ -1,22 +1,24 @@
+import { CalendarClock, Car, LayoutDashboard, Users } from "lucide-react";
+
 export const navLinks = [
   {
     title: "Dashboard",
     path: "/dashboard",
-    icon: "",
+    icon: <LayoutDashboard />,
   },
   {
     title: "Drivers management",
     path: "/drivers-panel",
-    icon: "",
+    icon: <Car />,
   },
   {
     title: "Shifts management",
     path: "/shifts-panel",
-    icon: "",
+    icon: <CalendarClock />,
   },
   {
     title: "Clients management",
     path: "/clients-panel",
-    icon: "",
+    icon: <Users />,
   },
 ];
