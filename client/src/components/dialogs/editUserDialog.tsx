@@ -11,16 +11,13 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import EditUserForm from "../forms/editUserForm";
+import { useToggle } from "@/hooks/useToggle";
 
 const EditUserDialog = () => {
-  const [isToggled, setIsToggled] = useState(false);
-
-  const handleDialogToggle = () => {
-    setIsToggled((prev) => !prev);
-  };
+  const [isToggled, setIsToggled] = useToggle();
 
   return (
-    <Dialog open={isToggled} onOpenChange={handleDialogToggle}>
+    <Dialog open={isToggled} onOpenChange={setIsToggled}>
       <DialogTrigger asChild>
         <Button className="absolute top-2 right-2" size="sm" variant="outline">
           Edit user
@@ -33,7 +30,7 @@ const EditUserDialog = () => {
             Make changes to your user here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
-        <EditUserForm toggleDialog={handleDialogToggle} />
+        <EditUserForm toggleDialog={setIsToggled} />
       </DialogContent>
     </Dialog>
   );
