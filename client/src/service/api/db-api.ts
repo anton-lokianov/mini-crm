@@ -1,5 +1,5 @@
 import { api } from "./apiConfig";
-import { SignInResponse, User } from "@/lib/types/globalTypes";
+import { AuthUser, SignInResponse, User } from "@/lib/types/globalTypes";
 
 export const signIn = async ({
   userName,
@@ -28,13 +28,8 @@ export const signIn = async ({
 
     return response.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("signIn error: ", error.message);
-      throw new Error(`SignIn failed: ${error.message}`);
-    } else {
-      console.error("signIn error: Unknown error");
-      throw new Error("SignIn failed: An unknown error occurred.");
-    }
+    console.error("signIn error: ", error);
+    throw error;
   }
 };
 
@@ -55,13 +50,8 @@ export const createSubUser = async (
 
     return response.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("createSubUser error: ", error.message);
-      throw new Error(`Failed to create sub user: ${error.message}`);
-    } else {
-      console.error("createSubUser error: Unknown error");
-      throw new Error("Failed to create sub user: An unknown error occurred.");
-    }
+    console.error("createSubUser error: ", error);
+    throw error;
   }
 };
 
@@ -78,13 +68,8 @@ export const getSubUsers = async (): Promise<Partial<User[]>> => {
 
     return response.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("getSubUsers error: ", error.message);
-      throw new Error(`Failed to get sub users: ${error.message}`);
-    } else {
-      console.error("getSubUsers error: Unknown error");
-      throw new Error("Failed to get sub users: An unknown error occurred.");
-    }
+    console.error("getSubUsers error: ", error);
+    throw error;
   }
 };
 
@@ -101,15 +86,8 @@ export const deleteAuthorUser = async (): Promise<{ message: string }> => {
 
     return response.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("deleteAuthorUser error: ", error.message);
-      throw new Error(`Failed to delete author user: ${error.message}`);
-    } else {
-      console.error("deleteAuthorUser error: Unknown error");
-      throw new Error(
-        "Failed to delete author user: An unknown error occurred."
-      );
-    }
+    console.error("deleteAuthorUser error: ", error);
+    throw error;
   }
 };
 
@@ -128,13 +106,8 @@ export const deleteSubUser = async (
 
     return response.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("deleteSubUser error: ", error.message);
-      throw new Error(`Failed to delete sub user: ${error.message}`);
-    } else {
-      console.error("deleteSubUser error: Unknown error");
-      throw new Error("Failed to delete sub user: An unknown error occurred.");
-    }
+    console.error("deleteSubUser error: ", error);
+    throw error;
   }
 };
 
@@ -151,12 +124,29 @@ export const getAuthUser = async (): Promise<Partial<User>> => {
 
     return response.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("getAuthUser error: ", error.message);
-      throw new Error(`Failed to get auth user: ${error.message}`);
-    } else {
-      console.error("getAuthUser error: Unknown error");
-      throw new Error("Failed to get auth user: An unknown error occurred.");
+    console.error("getAuthUser error: ", error);
+    throw error;
+  }
+};
+
+export const updateUserDetails = async (
+  data: Record<string, string>
+): Promise<AuthUser> => {
+  try {
+    const response = await api.put("/admin/updateUserDetails", {
+      ...data,
+    });
+
+    if (response.status !== 200) {
+      console.error(
+        `updateUserDetails failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to update user details: ${response.statusText}`);
     }
+
+    return response.data;
+  } catch (error) {
+    console.error("updateUserDetails error: ", error);
+    throw error;
   }
 };

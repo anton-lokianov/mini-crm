@@ -18,4 +18,6 @@ router.delete("/deleteSubUser/:id", verify, adminControllers.deleteSubUser);
 
 router.delete("/deleteAuthorUser", verify, adminControllers.deleteAuthorUser);
 
+router.put("/updateUserDetails", verify, adminControllers.updateUserDetails);
+
 export default router;

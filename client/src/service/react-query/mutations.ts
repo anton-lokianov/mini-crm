@@ -4,6 +4,7 @@ import {
   deleteAuthorUser,
   deleteSubUser,
   signIn,
+  updateUserDetails,
 } from "../api/db-api";
 import { useAuthStore } from "../store/auth-store";
 import { toast } from "sonner";
@@ -78,6 +79,29 @@ export const useDeleteSubUserMutation = () => {
       });
       queryClient.invalidateQueries({
         queryKey: ["subUsers"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error("Error", {
+        description: error.response.data.error.message || "An error occurred",
+      });
+    },
+  });
+};
+
+export const useUpdateUserDetailsMutation = () => {
+  const queryClient = useQueryClient();
+  const changeUserDetails = useAuthStore((state) => state.changeUserDetails);
+  return useMutation({
+    mutationFn: (data: Record<string, string>) => updateUserDetails(data),
+    onSuccess: (data) => {
+      console.log(data);
+      toast.success("Success", {
+        description: "User details updated successfully",
+      });
+      changeUserDetails(data);
+      queryClient.invalidateQueries({
+        queryKey: ["authUser"],
       });
     },
     onError: (error: any) => {

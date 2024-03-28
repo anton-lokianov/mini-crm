@@ -13,6 +13,7 @@ type Action = {
   signIn: (token: string, user: AuthUser, expirationDate: string) => void;
   signOut: () => void;
   checkToken: () => void;
+  changeUserDetails: (user: AuthUser) => void;
 };
 
 type AuthStore = InitialState & Action;
@@ -32,6 +33,7 @@ export const useAuthStore = create<AuthStore>()(
           set({ token: null, user: null, expirationDate: null });
         }
       },
+      changeUserDetails: (user) => set({ user }),
     }),
     {
       name: "user",

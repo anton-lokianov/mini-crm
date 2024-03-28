@@ -161,10 +161,75 @@ const getAuthUser = async (
   }
 };
 
+const updateUserDetails = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.user?.id;
+    const updatedData = { ...req.body };
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
+
+    let updatePassword = false;
+
+    if (updatedData.oldPassword && updatedData.newPassword) {
+      const passwordMatch = await bcrypt.compare(
+        updatedData.oldPassword,
+        user.password
+      );
+
+      if (!passwordMatch) {
+        throw new BadRequestError("Old password is incorrect");
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      updatedData.newPassword = await bcrypt.hash(
+        updatedData.newPassword,
+        salt
+      );
+      updatePassword = true;
+
+      delete updatedData.oldPassword;
+    }
+
+    let updateObject = { ...updatedData };
+    if (updatePassword) {
+      updateObject.password = updatedData.newPassword;
+    }
+
+    const updateUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updateObject },
+      { new: true }
+    );
+
+    if (!updateUser) {
+      throw new BadRequestError("User not updated");
+    }
+
+    res.status(200).json({
+      userName: updateUser.userName,
+      email: updateUser.email,
+      role: updateUser.role,
+      fullName: `${updateUser.firstName} ${updateUser.lastName}`,
+      company: updateUser.company,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   createSubUser,
   getSubUsers,
   deleteSubUser,
   deleteAuthorUser,
   getAuthUser,
+  updateUserDetails,
 };
