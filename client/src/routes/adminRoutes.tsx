@@ -5,13 +5,13 @@ import { useAuthStore } from "@/service/store/auth-store";
 const AdminRoutes = () => {
   const user = useAuthStore((state) => state.user);
 
+  if (user?.role !== "admin") {
+    return <Navigate to="/dashboard" replace={true} />;
+  }
+
   return (
     <>
-      {user?.role === "admin" ? (
-        <Outlet />
-      ) : (
-        <Navigate to="/dashboard" replace={true} />
-      )}
+      <Outlet />
     </>
   );
 };
