@@ -1,4 +1,3 @@
-import { access } from "fs";
 import { CalendarClock, Car, LayoutDashboard, Users } from "lucide-react";
 
 export const navLinks = [
@@ -24,6 +23,6 @@ export const navLinks = [
     title: "Clients management",
     path: "/clients-panel",
     icon: <Users />,
-    access: "all",
+    access: ["admin", "manager"],
   },
 ];

@@ -48,7 +48,7 @@ export function RoadCallTable() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-  const [filter, setFilter] = React.useState("");
+  const [selectFilter, setSelectFilter] = React.useState("");
 
   const table = useReactTable({
     data,
@@ -73,14 +73,18 @@ export function RoadCallTable() {
     <div className="w-full">
       <div className="flex items-center py-4 gap-4">
         <Input
-          placeholder={`Search by ${filter ? filter : "select a filter"}`}
-          value={(table.getColumn(filter)?.getFilterValue() as string) ?? ""}
+          placeholder={`Search by ${
+            selectFilter ? selectFilter : "select a filter"
+          }`}
+          value={
+            (table.getColumn(selectFilter)?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
-            table.getColumn(filter)?.setFilterValue(event.target.value)
+            table.getColumn(selectFilter)?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        <Select onValueChange={(value) => setFilter(value)}>
+        <Select onValueChange={(value) => setSelectFilter(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a filter" />
           </SelectTrigger>
