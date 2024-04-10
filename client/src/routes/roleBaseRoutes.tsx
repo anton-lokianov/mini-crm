@@ -10,7 +10,7 @@ type Props = {
 const RoleBaseRoutes = ({ roles }: Props) => {
   const user = useAuthStore((state) => state.user);
 
-  if (!roles.includes(user!.role as Role)) {
+  if (!roles.includes(user?.role as Role)) {
     return <Navigate to="/dashboard" replace={true} />;
   }
 
