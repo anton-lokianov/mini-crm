@@ -39,7 +39,6 @@ const SideBarLinks = () => {
     if (Array.isArray(link.access)) {
       return link.access.includes(user!.role);
     }
-    return link.access === user!.role;
   });
 
   return (
