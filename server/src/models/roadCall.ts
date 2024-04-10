@@ -6,10 +6,9 @@ interface IRoadCall extends Document {
   phoneNumber: number;
   secondPhoneNumber: number;
   date: Date;
-  time: string;
   location: string;
   description: string;
-  finalLocation: string;
+  destination: string;
   status: string;
   statusTimestamp: Date;
   driver: Schema.Types.ObjectId;
@@ -27,10 +26,9 @@ const roadCallSchema = new Schema<IRoadCall>(
     phoneNumber: { type: Number, required: true, trim: true, minlength: 10 },
     secondPhoneNumber: { type: Number, trim: true, minlength: 10 },
     date: { type: Date, trim: true, minlength: 2, default: Date.now },
-    time: { type: String, trim: true, minlength: 2 },
     location: { type: String, required: true, trim: true, minlength: 2 },
     description: { type: String, trim: true, minlength: 2 },
-    finalLocation: { type: String, trim: true, minlength: 2 },
+    destination: { type: String, trim: true, minlength: 2 },
     status: {
       type: String,
       enum: ["pending", "inProgress", "arrival", "done"],

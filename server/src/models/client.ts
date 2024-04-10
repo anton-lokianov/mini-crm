@@ -27,7 +27,7 @@ const clientSchema = new Schema<IClient>(
     carNumber: { type: String, required: true, minlength: 2 },
     address: { type: String, required: true, minlength: 2 },
     city: { type: String, required: true, minlength: 2 },
-    id: { type: Number, required: true, minlength: 9 },
+    id: { type: Number, required: true, minlength: 9, unique: true },
     roadCalls: [{ type: Schema.Types.ObjectId, ref: "roadCall" }],
   },
   { timestamps: true }
