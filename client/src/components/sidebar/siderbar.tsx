@@ -10,6 +10,7 @@ import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/service/store/auth-store";
 
 type Props = {};
 
@@ -31,10 +32,19 @@ const Sidebar = (props: Props) => {
 
 const SideBarLinks = () => {
   const location = useLocation();
+  const user = useAuthStore((state) => state.user);
+
+  const accessedNavLinks = navLinks.filter((link) => {
+    if (link.access === "all") return true;
+    if (Array.isArray(link.access)) {
+      return link.access.includes(user!.role);
+    }
+    return link.access === user!.role;
+  });
 
   return (
     <nav className="flex flex-col gap-2 mt-14">
-      {navLinks.map((link) => (
+      {accessedNavLinks.map((link) => (
         <div
           className={cn(
             "flex items-center ml-4 gap-2 py-1 px-4 rounded-l-full relative",
