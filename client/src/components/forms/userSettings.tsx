@@ -53,7 +53,8 @@ const UserSettingsForm = () => {
     <Form {...form}>
       <form
         className="grid grid-cols-2 gap-4 w-full"
-        onSubmit={form.handleSubmit(handleSubmit)}>
+        onSubmit={form.handleSubmit(handleSubmit)}
+      >
         <FormField
           control={form.control}
           name="firstName"
@@ -61,11 +62,7 @@ const UserSettingsForm = () => {
             <FormItem className="col-span-1">
               <FormLabel>First name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="firstName"
-                  autoComplete="firstName"
-                  {...field}
-                />
+                <Input placeholder="john" autoComplete="firstName" {...field} />
               </FormControl>
               <FormDescription>
                 Enter a first name, of your sub user
@@ -81,11 +78,7 @@ const UserSettingsForm = () => {
             <FormItem className="col-span-1">
               <FormLabel>Last name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="lastName"
-                  autoComplete="lastName"
-                  {...field}
-                />
+                <Input placeholder="doe" autoComplete="lastName" {...field} />
               </FormControl>
               <FormDescription>
                 Enter a last name, of your sub user
@@ -101,7 +94,11 @@ const UserSettingsForm = () => {
             <FormItem className="col-span-1">
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="email" autoComplete="email" {...field} />
+                <Input
+                  placeholder="name@mail.com"
+                  autoComplete="email"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>Enter a email, of your sub user</FormDescription>
               <FormMessage />
@@ -116,7 +113,7 @@ const UserSettingsForm = () => {
               <FormLabel>User name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="userName"
+                  placeholder="john123"
                   autoComplete="userName"
                   {...field}
                 />
@@ -137,7 +134,7 @@ const UserSettingsForm = () => {
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="password"
+                  placeholder="**********"
                   autoComplete="password"
                   {...field}
                 />
@@ -201,25 +198,29 @@ const UserSettingsForm = () => {
                   className="gap-4"
                   onValueChange={(value: string) =>
                     form.setValue("role", value)
-                  }>
+                  }
+                >
                   <ToggleGroupItem
                     value="operator"
                     size="xl"
-                    className="flex flex-col gap-1">
+                    className="flex flex-col gap-1"
+                  >
                     <Wrench className="text-primary h-8 w-8" />
                     Operator
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="manager"
                     size="xl"
-                    className="flex flex-col gap-1">
+                    className="flex flex-col gap-1"
+                  >
                     <Key className="text-primary h-8 w-8" />
                     Manager
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="service"
                     size="xl"
-                    className="flex flex-col gap-1">
+                    className="flex flex-col gap-1"
+                  >
                     <PhoneCall className="text-primary h-8 w-8" /> Service
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -234,7 +235,8 @@ const UserSettingsForm = () => {
         <Button
           type="submit"
           className="col-span-2 uppercase"
-          disabled={isPending}>
+          disabled={isPending}
+        >
           {isPending ? "Loading..." : "Create Sub User"}
         </Button>
       </form>
