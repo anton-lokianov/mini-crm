@@ -1,19 +1,32 @@
 import { Request, Response, NextFunction } from "express";
+import winston from "winston";
 
-export const logger = (req: Request, res: Response, next: NextFunction) => {
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.timestamp(),
+    winston.format.printf(
+      (info) => `${info.timestamp} ${info.level}: ${info.message}`
+    )
+  ),
+  transports: [new winston.transports.Console()],
+});
+
+export const logMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const start = Date.now();
 
-  const logDetails = () => {
+  res.on("finish", () => {
     const { method, url, body, query, params, headers } = req;
     const { statusCode } = res;
     const responseTime = Date.now() - start;
 
-    console.log(
-      `method: ${method},
-      url: ${url},
-      statusCode: ${statusCode},
-      responseTime: ${responseTime}ms,
-      requestData: ${JSON.stringify(
+    logger.info(
+      `method: ${method}, url: ${url}, statusCode: ${statusCode}, responseTime: ${responseTime}ms, requestData: ${JSON.stringify(
         {
           body,
           query,
@@ -24,8 +37,7 @@ export const logger = (req: Request, res: Response, next: NextFunction) => {
         2
       )}`
     );
-  };
+  });
 
-  res.on("finish", logDetails);
   next();
 };

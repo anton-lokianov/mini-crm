@@ -7,7 +7,7 @@ import http from "http";
 import { Server as SocketIOServer } from "socket.io";
 
 import { errorMiddleware } from "./src/middlewares/errorHandler";
-import { logger } from "./src/middlewares/logger";
+import { logMiddleware } from "./src/middlewares/logger";
 import authRouter from "./src/routes/auth";
 import adminRouter from "./src/routes/admin";
 
@@ -47,7 +47,7 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(helmet());
     this.app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-    this.app.use(logger);
+    this.app.use(logMiddleware);
   }
 
   private initialRoutes(): void {
