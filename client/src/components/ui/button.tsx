@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { motion, MotionProps } from "framer-motion";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -32,26 +31,13 @@ const buttonVariants = cva(
   }
 );
 
-type Override<T1, T2> = Omit<T1, keyof T2> & T2;
-
-export interface ButtonProps
-  extends Override<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> & MotionProps
-  > {}
+export type ButtonProps = React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {};
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (
-      <motion.button
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
-        transition={{
-          duration: 0.1,
-          type: "spring",
-          bounce: 0.5,
-          stiffness: 200,
-        }}
+      <button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
