@@ -12,9 +12,9 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center h-20 px-11 border-b-[1px] relative">
-      <div className="flex items-center">
-        <img src="/logo.png" width={80} height={80} alt="logo" />
-      </div>
+      <h1 className="first-letter:font-extrabold  first-letter:text-5xl text-3xl text-primary font-light font-serif ml-4">
+        Tafnit
+      </h1>
       <div className="flex items-center gap-2">
         {!token && !user && (
           <Link

@@ -50,7 +50,7 @@ const SubUserCard = ({
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger onClick={async () => await deleteSubUser(_id)}>
-                <Trash2 className="w-8 h-8 text-red-400 cursor-pointer transform hover:-translate-y-[1px] transition-all ease-in active:translate-y-[2px]" />
+                <Trash2 className="w-8 h-8 text-red-500 cursor-pointer transform hover:-translate-y-[1px] transition-all ease-in active:translate-y-[2px]" />
               </TooltipTrigger>
               <TooltipContent>
                 <p>delete this sub user</p>

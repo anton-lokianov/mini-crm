@@ -50,7 +50,7 @@ const SignIn = () => {
                 <FormLabel>Username</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="username"
+                    placeholder="username1245"
                     autoComplete="username"
                     {...field}
                   />
@@ -67,7 +67,7 @@ const SignIn = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="password"
+                    placeholder="*********"
                     type="password"
                     autoComplete="current-password"
                     {...field}

@@ -14,7 +14,7 @@ import ShiftsPanel from "@/pages/shiftsPanel";
 
 const MainRoutes = () => {
   return (
-    <main className="h-screen">
+    <main className="h-full">
       <Routes>
         <Route element={<RootRoutes />}>
           <Route index element={<Home />} />

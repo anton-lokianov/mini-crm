@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import winston from "winston";
 
+const { colorize, timestamp, printf, combine } = winston.format;
+
 const logger = winston.createLogger({
   level: "info",
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.timestamp(),
-    winston.format.printf(
-      (info) => `${info.timestamp} ${info.level}: ${info.message}`
-    )
+  format: combine(
+    colorize(),
+    timestamp(),
+    printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
   ),
   transports: [new winston.transports.Console()],
 });

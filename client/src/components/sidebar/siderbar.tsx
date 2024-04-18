@@ -36,9 +36,7 @@ const SideBarLinks = () => {
 
   const accessedNavLinks = navLinks.filter((link) => {
     if (link.access === "all") return true;
-    if (Array.isArray(link.access)) {
-      return link.access.includes(user!.role);
-    }
+    return link.access.includes(user!.role);
   });
 
   return (

@@ -14,8 +14,8 @@ export const Login = () => {
           <SignInForm />
         </div>
         <img
-          src="/loginBG.webp"
-          className="hidden md:block h-full w-2/4 rounded rounded-tl-[9rem] shadow-sm shadow-foreground"
+          src="/crm.jpg"
+          className="hidden md:block h-full w-2/4 rounded rounded-tl-[5rem] shadow-sm shadow-foreground"
           alt="some image"
           loading="lazy"
         />

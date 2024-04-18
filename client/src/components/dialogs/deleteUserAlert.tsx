@@ -17,7 +17,7 @@ const DeleteUserAlert = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="bg-red-400 hover:bg-red-400/90">
+        <Button className="bg-red-500 hover:bg-red-500/90">
           Delete this user
         </Button>
       </AlertDialogTrigger>
@@ -33,8 +33,7 @@ const DeleteUserAlert = () => {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-red-500 hover:bg-red-500/90"
-            onClick={() => deleteUser()}
-          >
+            onClick={() => deleteUser()}>
             {isPending ? "Deleting..." : "Continue"}
           </AlertDialogAction>
         </AlertDialogFooter>
