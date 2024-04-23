@@ -8,7 +8,7 @@ import {
 } from "../ui/sheet";
 import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { navLinks } from "@/lib/constants";
+import { navLinks } from "./navlinks";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/service/store/auth-store";
 
@@ -44,9 +44,9 @@ const SideBarLinks = () => {
       {accessedNavLinks.map((link) => (
         <div
           className={cn(
-            "flex items-center ml-4 gap-2 py-1 px-4 rounded-l-full relative",
+            "flex items-center ml-4 gap-2 py-1 px-4 rounded-l-full w-[94.5%]",
             {
-              "bg-gradient-to-r from-primary to-red-500 navLink":
+              "bg-gradient-to-r from-primary to-red-500":
                 location.pathname.startsWith(link.path),
             }
           )}>
