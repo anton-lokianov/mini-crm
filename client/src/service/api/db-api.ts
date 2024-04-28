@@ -1,4 +1,4 @@
-import { api } from "./apiConfig";
+import { api } from "./api-config";
 import { AuthUser, SignInResponse, User } from "@/lib/types/globalTypes";
 
 export const signIn = async ({
