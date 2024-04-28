@@ -145,7 +145,7 @@ export const columns: ColumnDef<RoadCall>[] = [
   },
   {
     accessorKey: "date",
-    header: "Date",
+    header: "Open date",
     cell: ({ row }) => {
       const date = row.getValue("date") as string;
 
@@ -154,7 +154,7 @@ export const columns: ColumnDef<RoadCall>[] = [
   },
   {
     accessorKey: "client",
-    header: () => <div className="">Client</div>,
+    header: "Client Name",
     cell: ({ row }) => {
       const client = row.getValue("client") as string;
 

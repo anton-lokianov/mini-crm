@@ -10,13 +10,14 @@ import { errorMiddleware } from "./src/middlewares/errorHandler";
 import { logMiddleware } from "./src/middlewares/logger";
 import authRouter from "./src/routes/auth";
 import adminRouter from "./src/routes/admin";
+import driverRouter from "./src/routes/driver";
 
 dotenv.config();
 
 class App {
-  public app: Application;
+  app: Application;
+  io: SocketIOServer;
   private server: http.Server;
-  public io: SocketIOServer;
 
   constructor() {
     this.app = express();
@@ -53,6 +54,7 @@ class App {
   private initialRoutes(): void {
     this.app.use("/api/auth", authRouter);
     this.app.use("/api/admin", adminRouter);
+    this.app.use("/api/driver", driverRouter);
   }
 
   private initializeErrorHandling(): void {

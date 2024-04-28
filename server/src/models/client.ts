@@ -12,12 +12,12 @@ interface IClient extends Document {
   city: string;
   id: number;
   roadCalls: Schema.Types.ObjectId[];
-  user: Schema.Types.ObjectId;
+  author: Schema.Types.ObjectId;
 }
 
 const clientSchema = new Schema<IClient>(
   {
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    author: { type: Schema.Types.ObjectId, ref: "User", required: true },
     firstName: { type: String, required: true, trim: true, minlength: 2 },
     lastName: { type: String, required: true, trim: true, minlength: 2 },
     phoneNumber: { type: String, required: true, trim: true, minlength: 7 },
