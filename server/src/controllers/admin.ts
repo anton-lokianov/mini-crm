@@ -179,7 +179,6 @@ const updateUserDetails = async (
     const updatedData = { ...req.body };
 
     const user = await User.findById(userId);
-    const subUser = await SubUser.find({ author: userId });
 
     if (!user) {
       throw new NotFoundError("User not found");
@@ -217,14 +216,15 @@ const updateUserDetails = async (
       { $set: updateObject },
       { new: true }
     );
-    await SubUser.updateMany(
-      { author: userId },
-      { $set: { company: updatedData.company } }
-    );
 
     if (!updateUser) {
       throw new BadRequestError("User not updated");
     }
+
+    await SubUser.updateMany(
+      { author: userId },
+      { $set: { company: updatedData.company } }
+    );
 
     res.status(200).json({
       userName: updateUser.userName,
