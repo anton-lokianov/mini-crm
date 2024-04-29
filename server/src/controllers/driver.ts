@@ -29,7 +29,7 @@ const createDriver = async (
     } = req.body;
 
     const driver = await Driver.create({
-      author: user._id,
+      author: user.id,
       firstName,
       lastName,
       phoneNumber,
@@ -63,7 +63,7 @@ const getAllDrivers = async (
       throw new UnauthorizedError("User not found");
     }
 
-    const drivers = await Driver.find({ author: user._id });
+    const drivers = await Driver.find({ author: user.id });
 
     res.status(200).json({ drivers });
   } catch (error) {

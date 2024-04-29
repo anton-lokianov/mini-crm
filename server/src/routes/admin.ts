@@ -1,12 +1,12 @@
 import express from "express";
 
-import { isAdmin } from "../middlewares/adminAuth";
 import { verifyToken } from "../middlewares/verifyToken";
 import adminControllers from "../controllers/admin";
+import { roleAuth } from "../middlewares/roleAuth";
 
 const router = express.Router();
 
-const verify = [verifyToken, isAdmin];
+const verify = [verifyToken, roleAuth({ roles: ["admin"] })];
 
 router.post("/createSubUser", verify, adminControllers.createSubUser);
 
