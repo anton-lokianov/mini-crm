@@ -14,6 +14,7 @@ interface IDriver extends Document {
   shiftStartTime: string;
   shiftEndTime: string;
   livingArea: string;
+  city: string;
 }
 
 const driverSchema = new Schema<IDriver>(
@@ -22,6 +23,7 @@ const driverSchema = new Schema<IDriver>(
     firstName: { type: String, required: true, trim: true, minlength: 2 },
     lastName: { type: String, required: true, trim: true, minlength: 2 },
     phoneNumber: { type: String, required: true, trim: true, minlength: 10 },
+    city: { type: String, required: true, trim: true, minlength: 2 },
     id: { type: Number, required: true, minlength: 9 },
     carNumber: { type: String, required: true, minlength: 2 },
     shifts: [{ type: Schema.Types.ObjectId, ref: "shift" }],
