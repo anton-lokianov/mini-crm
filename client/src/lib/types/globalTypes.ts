@@ -23,3 +23,5 @@ export interface User {
   userName: string;
   company: string;
 }
+
+export type Role = "admin" | "manager" | "operator" | "service";

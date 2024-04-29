@@ -1,7 +1,6 @@
 import { useAuthStore } from "@/service/store/auth-store";
 import { Navigate, Outlet } from "react-router-dom";
-
-type Role = "admin" | "manager" | "operator" | "service";
+import { Role } from "@/lib/types/globalTypes";
 
 type Props = {
   roles: Role[];

@@ -118,7 +118,11 @@ const deleteAuthorUser = async (
   try {
     const userId = req.user?.id;
 
-    await Promise.all([
+    if (!userId) {
+      throw new NotFoundError("User not found");
+    }
+
+    const deleteAll = await Promise.all([
       SubUser.deleteMany({ author: userId }),
       Client.deleteMany({ user: userId }),
       Driver.deleteMany({ author: userId }),
@@ -128,6 +132,10 @@ const deleteAuthorUser = async (
       Message.deleteMany({ sender: userId }),
       User.findOneAndDelete({ _id: userId }),
     ]);
+
+    if (!deleteAll) {
+      throw new BadRequestError("User and all related entities not deleted");
+    }
 
     res
       .status(200)
