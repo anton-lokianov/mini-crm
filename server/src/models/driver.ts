@@ -9,10 +9,11 @@ interface IDriver extends Document {
   shifts: Schema.Types.ObjectId[];
   status: string;
   employeeType: string;
-  driverNumber: number;
+  factorNumber: number;
   author: Schema.Types.ObjectId;
   shiftStartTime: string;
   shiftEndTime: string;
+  livingArea: string;
 }
 
 const driverSchema = new Schema<IDriver>(
@@ -29,9 +30,13 @@ const driverSchema = new Schema<IDriver>(
       type: String,
       enum: ["tow-driver", "delivery-driver", "repair-driver"],
       required: true,
-      default: "tow-driver",
     },
-    driverNumber: { type: Number, required: true },
+    livingArea: {
+      type: String,
+      enum: ["north", "south", "center"],
+      required: true,
+    },
+    factorNumber: { type: Number, required: true },
     shiftStartTime: { type: String, required: true },
     shiftEndTime: { type: String, required: true },
   },
