@@ -14,7 +14,7 @@ export const roleAuth = ({ roles }: Roles) => {
       next();
     } else {
       throw new UnauthorizedError(
-        "Access denied. You do not have the required role."
+        "Access denied. You do not have permission to access this resource."
       );
     }
   };
