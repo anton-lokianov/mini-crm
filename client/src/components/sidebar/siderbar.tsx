@@ -38,7 +38,7 @@ const SideBarLinks = () => {
     () =>
       navLinks.filter((link) => {
         if (link.access === "all") return true;
-        return link.access.includes(user!.role);
+        return link.access.includes(user?.role || "");
       }),
     [user]
   );
@@ -53,7 +53,8 @@ const SideBarLinks = () => {
               "bg-gradient-to-r from-primary to-red-500":
                 location.pathname.startsWith(link.path),
             }
-          )}>
+          )}
+        >
           <span>{link.icon}</span>
           <Link to={link.path} className="text-lg">
             {link.title}
