@@ -95,7 +95,6 @@ export const useUpdateUserDetailsMutation = () => {
   return useMutation({
     mutationFn: (data: Record<string, string>) => updateUserDetails(data),
     onSuccess: (data) => {
-      console.log(data);
       toast.success("Success", {
         description: "User details updated successfully",
       });

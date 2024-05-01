@@ -5,7 +5,7 @@ import adminControllers from "../controllers/admin";
 import { roleAuth } from "../middlewares/roleAuth";
 import { validation } from "../middlewares/validation";
 import { subUserDTO } from "../dtos/subUserDTO";
-import { authUserDTO } from "../dtos/authUserDTO";
+import { updateAuthUserDTO } from "../dtos/authUserDTO";
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ router.delete("/deleteAuthorUser", verify, adminControllers.deleteAuthorUser);
 
 router.put(
   "/updateUserDetails",
-  validation(authUserDTO),
+  validation(updateAuthUserDTO),
   verify,
   adminControllers.updateUserDetails
 );
