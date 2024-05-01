@@ -78,7 +78,9 @@ export function RoadCallTable() {
             selectFilter ? selectFilter : "selected filter"
           }`}
           value={
-            (table.getColumn(selectFilter)?.getFilterValue() as string) ?? ""
+            selectFilter
+              ? (table.getColumn(selectFilter)?.getFilterValue() as string)
+              : ""
           }
           onChange={(event) =>
             table.getColumn(selectFilter)?.setFilterValue(event.target.value)
