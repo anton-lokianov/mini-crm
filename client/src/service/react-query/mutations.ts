@@ -22,6 +22,9 @@ export const useSignInMutation = () => {
     }) => signIn({ userName, password }),
     onSuccess: (data) => {
       signInStore(data.token, data.user, data.exertionDate);
+      toast.success("Success", {
+        description: `Welcome ${data.user.fullName}`,
+      });
     },
     onError: (error: any) => {
       toast.error("Error", {
