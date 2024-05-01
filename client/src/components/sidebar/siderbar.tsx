@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Sheet,
   SheetContent,
@@ -34,10 +34,14 @@ const SideBarLinks = () => {
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
 
-  const accessedNavLinks = navLinks.filter((link) => {
-    if (link.access === "all") return true;
-    return link.access.includes(user!.role);
-  });
+  const accessedNavLinks = useMemo(
+    () =>
+      navLinks.filter((link) => {
+        if (link.access === "all") return true;
+        return link.access.includes(user!.role);
+      }),
+    [user]
+  );
 
   return (
     <nav className="flex flex-col gap-2 mt-14">
