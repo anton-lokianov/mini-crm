@@ -6,7 +6,7 @@ import { useAuthStore } from "@/service/store/auth-store";
 const RootRoutes = () => {
   const { user, token } = useAuthStore((state) => state);
 
-  if (token && user) {
+  if (token || user) {
     return <Navigate to="/dashboard" replace={true} />;
   }
 
