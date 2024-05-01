@@ -10,7 +10,7 @@ import {
 
 const Menu = () => {
   return (
-    <div className="flex items-center justify-center flex-col gap-3">
+    <div className="flex items-center justify-center flex-col">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>search call by car number</AccordionTrigger>
