@@ -18,7 +18,7 @@ const Header = () => {
       <div className="flex items-center gap-2">
         {!token && !user && (
           <Link
-            className="bg-primary px-6 py-[6px] rounded hover:bg-primary/70 tracking-wider text-white"
+            className="bg-gradient-to-r from-primary  to-red-500 px-6 py-[6px] rounded hover:opacity-90 tracking-wider text-white"
             to={currentPath ? "/login" : "/"}>
             {currentPath ? "LOGIN" : "HOME"}
           </Link>
