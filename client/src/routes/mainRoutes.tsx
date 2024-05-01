@@ -4,13 +4,15 @@ import Dashboard from "@/pages/dashboard";
 import Home from "@/pages/home";
 import { Login } from "@/pages/login";
 import Page404 from "@/pages/page404";
-import UserSettings from "@/pages/userSettings";
 import RootRoutes from "@/routes/rootRoutes";
 import AuthRoutes from "./authRoutes";
 import RoleBaseRoutes from "./roleBaseRoutes";
-import DriversPanel from "@/pages/driversPanel";
-import ClientsPanel from "@/pages/clientsPanel";
-import ShiftsPanel from "@/pages/shiftsPanel";
+import { Suspense, lazy } from "react";
+
+const UserSettings = lazy(() => import("@/pages/userSettings"));
+const DriversPanel = lazy(() => import("@/pages/driversPanel"));
+const ClientsPanel = lazy(() => import("@/pages/clientsPanel"));
+const ShiftsPanel = lazy(() => import("@/pages/shiftsPanel"));
 
 const MainRoutes = () => {
   return (
@@ -21,19 +23,55 @@ const MainRoutes = () => {
           <Route path="/login" element={<Login />} />
         </Route>
         <Route element={<AuthRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
           <Route element={<RoleBaseRoutes roles={["admin"]} />}>
-            <Route path="/user/settings" element={<UserSettings />} />
+            <Route
+              path="/user/settings"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <UserSettings />
+                </Suspense>
+              }
+            />
           </Route>
           <Route
             element={
               <RoleBaseRoutes roles={["admin", "manager", "operator"]} />
-            }>
-            <Route path="/drivers-panel" element={<DriversPanel />} />
+            }
+          >
+            <Route
+              path="/drivers-panel"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <DriversPanel />
+                </Suspense>
+              }
+            />
           </Route>
           <Route element={<RoleBaseRoutes roles={["admin", "manager"]} />}>
-            <Route path="/clients-panel" element={<ClientsPanel />} />
-            <Route path="/shifts-panel" element={<ShiftsPanel />} />
+            <Route
+              path="/clients-panel"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ClientsPanel />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/shifts-panel"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ShiftsPanel />
+                </Suspense>
+              }
+            />
           </Route>
         </Route>
         <Route path="*" element={<Page404 />} />
