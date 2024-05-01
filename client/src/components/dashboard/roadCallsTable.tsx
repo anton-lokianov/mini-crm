@@ -70,11 +70,12 @@ export function RoadCallTable() {
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-6">
       <div className="flex items-center py-4 gap-4">
         <Input
+          disabled={!selectFilter}
           placeholder={`Search by ${
-            selectFilter ? selectFilter : "select a filter"
+            selectFilter ? selectFilter : "selected filter"
           }`}
           value={
             (table.getColumn(selectFilter)?.getFilterValue() as string) ?? ""
