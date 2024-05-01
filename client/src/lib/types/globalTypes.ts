@@ -1,9 +1,5 @@
-export interface AuthUser {
-  userName: string;
-  role: string;
-  email: string;
+export interface AuthUser extends Partial<User> {
   fullName: string;
-  company: string;
 }
 
 export type SignInResponse = {
