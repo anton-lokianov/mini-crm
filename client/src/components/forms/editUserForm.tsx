@@ -46,12 +46,10 @@ const EditUserForm = ({ toggleDialog }: Props) => {
   }, [getUserDetails, form.reset]);
 
   const handleSubmit = async (data: z.infer<typeof editUserFormSchema>) => {
-    try {
-      const response = await updateUserDetails(data);
-      if (response) {
-        toggleDialog();
-      }
-    } catch (error) {}
+    const response = await updateUserDetails(data);
+    if (response) {
+      toggleDialog();
+    }
   };
 
   return (

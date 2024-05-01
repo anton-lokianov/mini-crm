@@ -1,8 +1,8 @@
 import { useAuthStore } from "@/service/store/auth-store";
 import { Role } from "@/lib/types/globalTypes";
+import { PropsWithChildren } from "react";
 
-type Props = {
-  children: React.ReactNode;
+type Props = PropsWithChildren & {
   roles: Role[];
 };
 
