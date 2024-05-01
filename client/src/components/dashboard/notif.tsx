@@ -10,15 +10,19 @@ const Notif = () => {
       <CardContent>
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">
-            <span className="font-semibold">Anton:</span>
-            <p className="">
-              Create call for 1231456 form Tel aviv to Jerusalem
-            </p>
-            <span>10:26</span>
+            <div className="flex gap-3">
+              <span className="font-semibold">Anton:</span>
+              <p className="">
+                Create call for 4214125 form rishon to tel aviv
+              </p>
+            </div>
+            <span>10:25</span>
           </div>
           <div className="flex justify-between">
-            <span className="font-semibold">Yossi:</span>
-            <p className="">Create call for 4214125 form heifa to malot</p>
+            <div className="flex gap-3">
+              <span className="font-semibold">Yossi:</span>
+              <p className="">Create call for 4214125 form heifa to malot</p>
+            </div>
             <span>10:25</span>
           </div>
         </div>
