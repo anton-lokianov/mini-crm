@@ -77,7 +77,10 @@ const SignIn = () => {
             )}
           />
           <div className="w-full space-y-2 mt-3">
-            <Button type="submit" className="w-1/2" disabled={isPending}>
+            <Button
+              type="submit"
+              className="w-1/2"
+              disabled={isPending || !form.formState.isValid}>
               {isPending ? "Loading..." : "Sign In"}
             </Button>
             <FormDescription>

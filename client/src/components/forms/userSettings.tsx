@@ -53,8 +53,7 @@ const UserSettingsForm = () => {
     <Form {...form}>
       <form
         className="grid grid-cols-2 gap-4 w-full"
-        onSubmit={form.handleSubmit(handleSubmit)}
-      >
+        onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
           control={form.control}
           name="firstName"
@@ -198,29 +197,25 @@ const UserSettingsForm = () => {
                   className="gap-4"
                   onValueChange={(value: string) =>
                     form.setValue("role", value)
-                  }
-                >
+                  }>
                   <ToggleGroupItem
                     value="operator"
                     size="xl"
-                    className="flex flex-col gap-1"
-                  >
+                    className="flex flex-col gap-1">
                     <Wrench className="text-primary h-8 w-8" />
                     Operator
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="manager"
                     size="xl"
-                    className="flex flex-col gap-1"
-                  >
+                    className="flex flex-col gap-1">
                     <Key className="text-primary h-8 w-8" />
                     Manager
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="service"
                     size="xl"
-                    className="flex flex-col gap-1"
-                  >
+                    className="flex flex-col gap-1">
                     <PhoneCall className="text-primary h-8 w-8" /> Service
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -235,8 +230,7 @@ const UserSettingsForm = () => {
         <Button
           type="submit"
           className="col-span-2 uppercase"
-          disabled={isPending}
-        >
+          disabled={isPending}>
           {isPending ? "Loading..." : "Create Sub User"}
         </Button>
       </form>

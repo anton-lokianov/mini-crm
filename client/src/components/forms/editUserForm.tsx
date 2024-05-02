@@ -169,7 +169,7 @@ const EditUserForm = ({ toggleDialog }: Props) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-3" size="sm">
+        <Button type="submit" className="mt-3" size="sm" disabled={isPending}>
           {isPending ? "saving..." : "save"}
         </Button>
       </form>
