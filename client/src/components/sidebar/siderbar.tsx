@@ -17,7 +17,9 @@ type Props = {};
 const Sidebar = (props: Props) => {
   return (
     <Sheet>
-      <SheetTrigger className="absolute left-6 cursor-pointer" asChild>
+      <SheetTrigger
+        className="absolute left-6 cursor-pointer transition-all hover:scale-105"
+        asChild>
         <Menu />
       </SheetTrigger>
       <SheetContent side="left" className="w-[17rem] px-0">
@@ -53,8 +55,7 @@ const SideBarLinks = () => {
               "bg-gradient-to-r from-primary to-red-500":
                 location.pathname.startsWith(link.path),
             }
-          )}
-        >
+          )}>
           <span>{link.icon}</span>
           <Link to={link.path} className="text-lg">
             {link.title}
