@@ -49,6 +49,7 @@ const SideBarLinks = () => {
     <nav className="flex flex-col gap-2 mt-14">
       {accessedNavLinks.map((link) => (
         <div
+          key={link.title}
           className={cn(
             "flex items-center ml-4 gap-2 py-1 px-4 rounded-l-full w-[94.5%]",
             {

@@ -5,7 +5,7 @@ import { RoadCallTable } from "@/components/dashboard/roadCallsTable";
 const Dashboard = () => {
   return (
     <section className="p-10">
-      <div className="flex gap-2 container justify-around">
+      <div className="flex gap-5 justify-around">
         <Menu />
         <Notif />
       </div>

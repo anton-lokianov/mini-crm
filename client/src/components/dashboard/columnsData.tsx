@@ -176,7 +176,12 @@ export const columns: ColumnDef<RoadCall>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View road call details</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              View road call details
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              Preform action
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
