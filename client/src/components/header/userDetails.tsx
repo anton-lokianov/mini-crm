@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 type Props = {
   userName: string;
   fullName: string;
-  email: string;
   role: string;
 };
 
@@ -47,8 +46,7 @@ const UserDetails = ({ userName, fullName, role }: Props) => {
         {role === "admin" && (
           <DropdownMenuItem
             className="flex cursor-pointer tracking-wider"
-            onClick={() => navigate("/user/settings")}
-          >
+            onClick={() => navigate("/user/settings")}>
             <Settings className="h-4 w-4 text-primary" />
             <DropdownMenuLabel>Settings</DropdownMenuLabel>
           </DropdownMenuItem>
@@ -56,8 +54,7 @@ const UserDetails = ({ userName, fullName, role }: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => logout()}
-          className="flex justify-center items-center cursor-pointer"
-        >
+          className="flex justify-center items-center cursor-pointer">
           <LogOut className="h-4 w-4 text-primary" />
           <DropdownMenuLabel className="tracking-wider">
             LOGOUT

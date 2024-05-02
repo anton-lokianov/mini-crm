@@ -30,7 +30,11 @@ const Header = () => {
               {user.company}
             </h2>
             <Sidebar />
-            <UserDetails {...user} />
+            <UserDetails
+              fullName={user.fullName || ""}
+              userName={user.userName || ""}
+              role={user.role || ""}
+            />
           </>
         )}
         <ModeToggle />
