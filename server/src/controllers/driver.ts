@@ -3,6 +3,7 @@ import { Response, Request, NextFunction } from "express";
 import { AuthRequest } from "../types/authReq";
 import { Driver } from "../models/driver";
 import { BadRequestError, UnauthorizedError } from "../errors/errors";
+import { Shift } from "../models/shift";
 
 const createDriver = async (
   req: AuthRequest,
@@ -71,4 +72,63 @@ const getAllDrivers = async (
   }
 };
 
-export default { createDriver, getAllDrivers };
+const openDriverShift = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const { driverId } = req.params;
+  const user = req.user;
+
+  try {
+    if (!user) {
+      return next(new UnauthorizedError("User not found"));
+    }
+
+    const driver = await Driver.findOne({
+      _id: driverId,
+      author: user.id,
+    });
+
+    if (!driver) {
+      throw new BadRequestError("Driver not found");
+    }
+
+    const existingShift = await Shift.findOne({
+      driver: driverId,
+    });
+
+    if (existingShift) {
+      const shift = await Shift.updateOne(
+        {
+          _id: existingShift._id,
+        },
+        {
+          endTime: new Date(),
+        }
+      );
+      if (!shift) {
+        throw new BadRequestError("Shift not closed");
+      }
+      driver.status = "inactive";
+    } else {
+      const shift = await Shift.create({
+        driver: driverId,
+        startTime: new Date(),
+      });
+      if (!shift) {
+        throw new BadRequestError("Shift not created");
+      }
+
+      driver.status = "active";
+    }
+
+    await driver.save();
+
+    res.status(200).json({ message: "Shift updated successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { createDriver, getAllDrivers, openDriverShift };
