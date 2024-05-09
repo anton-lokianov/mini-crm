@@ -72,7 +72,7 @@ const getAllDrivers = async (
   }
 };
 
-const openDriverShift = async (
+const handleDriverShift = async (
   req: AuthRequest,
   res: Response,
   next: NextFunction
@@ -96,7 +96,7 @@ const openDriverShift = async (
 
     const existingShift = await Shift.findOne({
       driver: driverId,
-    });
+    }).sort({ startTime: -1 });
 
     if (existingShift) {
       const shift = await Shift.updateOne(
@@ -131,4 +131,4 @@ const openDriverShift = async (
   }
 };
 
-export default { createDriver, getAllDrivers, openDriverShift };
+export default { createDriver, getAllDrivers, handleDriverShift };

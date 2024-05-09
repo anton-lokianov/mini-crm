@@ -9,6 +9,6 @@ router.post("/createDriver", verifyToken, driverControllers.createDriver);
 
 router.get("/getAllDrivers", verifyToken, driverControllers.getAllDrivers);
 
-router.post("/openShift", verifyToken, driverControllers.openDriverShift);
+router.post("/openShift", verifyToken, driverControllers.handleDriverShift);
 
 export default router;
