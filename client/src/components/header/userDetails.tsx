@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { LogOut, Settings, User, UserCog } from "lucide-react";
 import { useAuthStore } from "@/service/store/auth-store";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 type Props = {
   userName: string;
@@ -22,6 +23,13 @@ type Props = {
 const UserDetails = ({ userName, fullName, role }: Props) => {
   const logout = useAuthStore((state) => state.signOut);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    toast.success("Success", {
+      description: "see you soon!",
+    });
+  };
 
   return (
     <DropdownMenu>
@@ -53,7 +61,7 @@ const UserDetails = ({ userName, fullName, role }: Props) => {
         )}
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => logout()}
+          onClick={handleLogout}
           className="flex justify-center items-center cursor-pointer">
           <LogOut className="h-4 w-4 text-primary" />
           <DropdownMenuLabel className="tracking-wider">

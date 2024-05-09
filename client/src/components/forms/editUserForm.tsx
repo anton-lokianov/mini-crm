@@ -24,8 +24,20 @@ const EditUserForm = () => {
     useUpdateUserDetailsMutation();
   const closeOverlay = useUIOverlayStore((state) => state.closeOverlay);
 
+  const defaultValues = {
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    phone: "",
+    company: "",
+    oldPassword: "",
+    newPassword: "",
+  };
+
   const form = useForm<z.infer<typeof editUserFormSchema>>({
     resolver: zodResolver(editUserFormSchema),
+    defaultValues,
   });
 
   useEffect(() => {
