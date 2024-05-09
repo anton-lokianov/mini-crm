@@ -46,7 +46,7 @@ const UserSettings = () => {
             variant="secondary"
             className="absolute right-0 top-0"
             onClick={() => openOverlay(<EditUserDialog />, "dialog")}>
-            Edit user
+            Edit account
           </Button>
         </CardContent>
         <Card className="border-red-500 rounded">
