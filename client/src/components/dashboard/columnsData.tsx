@@ -10,6 +10,8 @@ import {
 } from "../ui/dropdown-menu";
 import { Checkbox } from "../ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
+import { useUIOverlayStore } from "@/service/store/UIOverlay-store";
+import CallAction from "./callAction";
 
 export const data: RoadCall[] = [
   {
@@ -165,6 +167,8 @@ export const columns: ColumnDef<RoadCall>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      const openOverlay = useUIOverlayStore((state) => state.openOverlay);
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -179,7 +183,9 @@ export const columns: ColumnDef<RoadCall>[] = [
             <DropdownMenuItem className="cursor-pointer">
               View road call details
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem
+              onClick={() => openOverlay(<CallAction />, "sheet")}
+              className="cursor-pointer">
               Preform action
             </DropdownMenuItem>
           </DropdownMenuContent>
