@@ -13,6 +13,5 @@ export const subUserDTO = () => {
       .notEmpty()
       .isIn(["operator", "manager", "service"]),
     body("phone").isString().trim().notEmpty(),
-    body("company").isString().trim().notEmpty(),
   ];
 };
