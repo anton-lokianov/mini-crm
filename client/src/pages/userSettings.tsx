@@ -12,9 +12,11 @@ import { Button } from "@/components/ui/button";
 import SubUserList from "@/components/subUser/subUserList";
 import DeleteUserAlert from "@/components/dialogs/deleteUserAlert";
 import EditUserDialog from "@/components/dialogs/editUserDialog";
+import { useModalStore } from "@/service/store/modal-store";
 
 const UserSettings = () => {
   const user = useAuthStore((state) => state.user);
+  const openModal = useModalStore((state) => state.openModal);
 
   return (
     <section className="p-4 max-w-3xl w-full mx-auto">
@@ -41,7 +43,12 @@ const UserSettings = () => {
         </div>
         <CardContent>
           <UserSettingsForm />
-          <EditUserDialog />
+          <Button
+            variant="secondary"
+            className="absolute right-0 top-0"
+            onClick={() => openModal(<EditUserDialog />, "dialog")}>
+            Edit user
+          </Button>
         </CardContent>
         <Card className="border-red-500 rounded">
           <CardHeader className="text-center">
@@ -51,7 +58,12 @@ const UserSettings = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 flex flex-col items-center">
-            <DeleteUserAlert />
+            <Button
+              size="sm"
+              className="bg-red-500 hover:bg-red-500/90"
+              onClick={() => openModal(<DeleteUserAlert />, "alertDialog")}>
+              Delete account
+            </Button>
             <CardDescription className="font-semibold text-lg">
               sub users
             </CardDescription>

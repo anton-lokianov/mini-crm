@@ -60,7 +60,7 @@ export const useDeleteAuthorUserMutation = () => {
     mutationFn: () => deleteAuthorUser(),
     onSuccess: () => {
       toast.success("Success", {
-        description: "User and all subusers deleted successfully",
+        description: "User and all data was deleted successfully",
       });
       signOutStore();
     },

@@ -17,11 +17,7 @@ import { useGetAuthUserQuery } from "@/service/react-query/queries";
 import { useUpdateUserDetailsMutation } from "@/service/react-query/mutations";
 import { editUserFormSchema } from "@/validations/formValidations";
 
-type Props = {
-  toggleDialog: () => void;
-};
-
-const EditUserForm = ({ toggleDialog }: Props) => {
+const EditUserForm = () => {
   const { data: getUserDetails } = useGetAuthUserQuery();
   const { mutateAsync: updateUserDetails, isPending } =
     useUpdateUserDetailsMutation();
@@ -48,7 +44,6 @@ const EditUserForm = ({ toggleDialog }: Props) => {
   const handleSubmit = async (data: z.infer<typeof editUserFormSchema>) => {
     const response = await updateUserDetails(data);
     if (response) {
-      toggleDialog();
     }
   };
 

@@ -1,14 +1,17 @@
-import React from "react";
 import ModeToggle from "../global/modeToggle";
 import UserDetails from "./userDetails";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "@/service/store/auth-store";
 import Sidebar from "../sidebar/siderbar";
+import { Menu } from "lucide-react";
+import { Button } from "../ui/button";
+import { useModalStore } from "@/service/store/modal-store";
 
 const Header = () => {
   const location = useLocation();
   const currentPath = ["/"].includes(location.pathname);
   const { user, token } = useAuthStore((state) => state);
+  const openModal = useModalStore((state) => state.openModal);
 
   return (
     <header className="flex justify-between items-center h-20 px-11 border-b-[1px] relative">
@@ -29,7 +32,13 @@ const Header = () => {
             <h2 className="text-3xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-primary to-red-500">
               {user.company}
             </h2>
-            <Sidebar />
+            <Button
+              onClick={() => openModal(<Sidebar />, "sheet")}
+              size="sm"
+              variant="ghost"
+              className="absolute left-1">
+              <Menu />
+            </Button>
             <UserDetails
               fullName={user.fullName || ""}
               userName={user.userName || ""}

@@ -1,34 +1,18 @@
-import React, { useMemo } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
-import { Menu } from "lucide-react";
+import { useMemo } from "react";
+import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "./navlinks";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/service/store/auth-store";
 
-type Props = {};
-
-const Sidebar = (props: Props) => {
+const Sidebar = () => {
   return (
-    <Sheet>
-      <SheetTrigger
-        className="absolute left-6 cursor-pointer transition-all hover:scale-105"
-        asChild>
-        <Menu />
-      </SheetTrigger>
-      <SheetContent side="left" className="w-[17rem] px-0">
-        <SheetHeader>
-          <SheetTitle className="text-center">Navigation Menu</SheetTitle>
-        </SheetHeader>
-        <SideBarLinks />
-      </SheetContent>
-    </Sheet>
+    <SheetContent side="left" className="w-[17rem] px-0">
+      <SheetHeader>
+        <SheetTitle className="text-center">Navigation Menu</SheetTitle>
+      </SheetHeader>
+      <SideBarLinks />
+    </SheetContent>
   );
 };
 

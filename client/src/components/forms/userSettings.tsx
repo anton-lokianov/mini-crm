@@ -41,12 +41,8 @@ const UserSettingsForm = () => {
   });
 
   const handleSubmit = async (data: z.infer<typeof subUserSchema>) => {
-    try {
-      await createSubUser(data);
-      form.reset();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+    await createSubUser(data);
+    form.reset();
   };
 
   return (
