@@ -16,11 +16,13 @@ import { Button } from "../ui/button";
 import { useGetAuthUserQuery } from "@/service/react-query/queries";
 import { useUpdateUserDetailsMutation } from "@/service/react-query/mutations";
 import { editUserFormSchema } from "@/validations/formValidations";
+import { useUIOverlayStore } from "@/service/store/UIOverlay-store";
 
 const EditUserForm = () => {
   const { data: getUserDetails } = useGetAuthUserQuery();
   const { mutateAsync: updateUserDetails, isPending } =
     useUpdateUserDetailsMutation();
+  const closeOverlay = useUIOverlayStore((state) => state.closeOverlay);
 
   const form = useForm<z.infer<typeof editUserFormSchema>>({
     resolver: zodResolver(editUserFormSchema),
@@ -44,6 +46,7 @@ const EditUserForm = () => {
   const handleSubmit = async (data: z.infer<typeof editUserFormSchema>) => {
     const response = await updateUserDetails(data);
     if (response) {
+      closeOverlay();
     }
   };
 

@@ -5,13 +5,13 @@ import { useAuthStore } from "@/service/store/auth-store";
 import Sidebar from "../sidebar/siderbar";
 import { Menu } from "lucide-react";
 import { Button } from "../ui/button";
-import { useModalStore } from "@/service/store/modal-store";
+import { useUIOverlayStore } from "@/service/store/UIOverlay-store";
 
 const Header = () => {
   const location = useLocation();
   const currentPath = ["/"].includes(location.pathname);
   const { user, token } = useAuthStore((state) => state);
-  const openModal = useModalStore((state) => state.openModal);
+  const openOverlay = useUIOverlayStore((state) => state.openOverlay);
 
   return (
     <header className="flex justify-between items-center h-20 px-11 border-b-[1px] relative">
@@ -33,7 +33,7 @@ const Header = () => {
               {user.company}
             </h2>
             <Button
-              onClick={() => openModal(<Sidebar />, "sheet")}
+              onClick={() => openOverlay(<Sidebar />, "sheet")}
               size="sm"
               variant="ghost"
               className="absolute left-1">

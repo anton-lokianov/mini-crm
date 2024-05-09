@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import UserSettingsForm from "@/components/forms/userSettings";
 import {
   Card,
@@ -12,11 +11,11 @@ import { Button } from "@/components/ui/button";
 import SubUserList from "@/components/subUser/subUserList";
 import DeleteUserAlert from "@/components/dialogs/deleteUserAlert";
 import EditUserDialog from "@/components/dialogs/editUserDialog";
-import { useModalStore } from "@/service/store/modal-store";
+import { useUIOverlayStore } from "@/service/store/UIOverlay-store";
 
 const UserSettings = () => {
   const user = useAuthStore((state) => state.user);
-  const openModal = useModalStore((state) => state.openModal);
+  const openOverlay = useUIOverlayStore((state) => state.openOverlay);
 
   return (
     <section className="p-4 max-w-3xl w-full mx-auto">
@@ -46,7 +45,7 @@ const UserSettings = () => {
           <Button
             variant="secondary"
             className="absolute right-0 top-0"
-            onClick={() => openModal(<EditUserDialog />, "dialog")}>
+            onClick={() => openOverlay(<EditUserDialog />, "dialog")}>
             Edit user
           </Button>
         </CardContent>
@@ -61,7 +60,7 @@ const UserSettings = () => {
             <Button
               size="sm"
               className="bg-red-500 hover:bg-red-500/90"
-              onClick={() => openModal(<DeleteUserAlert />, "alertDialog")}>
+              onClick={() => openOverlay(<DeleteUserAlert />, "alertDialog")}>
               Delete account
             </Button>
             <CardDescription className="font-semibold text-lg">

@@ -4,7 +4,7 @@ import { Toaster } from "./components/ui/sonner";
 import MainRoutes from "./routes/mainRoutes";
 import { useAuthStore } from "./service/store/auth-store";
 import ErrorBoundary from "./components/global/errorBoundary";
-import CustomModal from "./components/global/customModal";
+import CustomUIOverlay from "./components/global/customUIOverlay";
 
 const App = () => {
   const checkToken = useAuthStore((state) => state.checkToken);
@@ -18,7 +18,7 @@ const App = () => {
       <Header />
       <MainRoutes />
       <Toaster richColors />
-      <CustomModal />
+      <CustomUIOverlay />
     </>
   );
 };
