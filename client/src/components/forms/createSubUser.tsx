@@ -25,7 +25,7 @@ import { Button } from "../ui/button";
 import { useCreateSubUserMutation } from "@/service/react-query/mutations";
 import { subUserSchema } from "@/validations/formValidations";
 
-const UserSettingsForm = () => {
+const CreateSubUser = () => {
   const { mutateAsync: createSubUser, isPending } = useCreateSubUserMutation();
   const form = useForm<z.infer<typeof subUserSchema>>({
     resolver: zodResolver(subUserSchema),
@@ -234,4 +234,4 @@ const UserSettingsForm = () => {
   );
 };
 
-export default UserSettingsForm;
+export default CreateSubUser;

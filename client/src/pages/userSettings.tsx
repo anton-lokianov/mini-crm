@@ -1,4 +1,4 @@
-import UserSettingsForm from "@/components/forms/userSettings";
+import CreateSubUser from "@/components/forms/createSubUser";
 import {
   Card,
   CardContent,
@@ -21,7 +21,7 @@ const UserSettings = () => {
     <section className="p-4 max-w-3xl w-full mx-auto">
       <Card className="p-3 relative">
         <CardHeader className="text-center">
-          <CardTitle className="text-primary">User Settings</CardTitle>
+          <CardTitle className="text-primary">Settings</CardTitle>
           <CardDescription>
             create sub account and update your user settings
           </CardDescription>
@@ -41,7 +41,7 @@ const UserSettings = () => {
           </CardDescription>
         </div>
         <CardContent>
-          <UserSettingsForm />
+          <CreateSubUser />
           <Button
             variant="secondary"
             className="absolute right-0 top-0"
