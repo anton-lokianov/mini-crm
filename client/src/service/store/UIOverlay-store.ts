@@ -15,7 +15,7 @@ type UIOverlayAction = {
 
 type UIOverlayStore = InitialState & UIOverlayAction;
 
-export const useUIOverlayStore = create<UIOverlayStore>((set) => ({
+export const useUIOverlayStore = create<UIOverlayStore>()((set) => ({
   overlay: null,
   overlayType: null,
   isOpen: false,
