@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAuthUser, getSubUsers } from "../api/db-api";
+import { getAuthUser, getDrivers, getSubUsers } from "../api/db-api";
 
 export const useGetSubUsersQuery = () => {
   return useQuery({
@@ -12,5 +12,12 @@ export const useGetAuthUserQuery = () => {
   return useQuery({
     queryKey: ["authUser"],
     queryFn: getAuthUser,
+  });
+};
+
+export const useGetDriverQuery = () => {
+  return useQuery({
+    queryKey: ["drivers"],
+    queryFn: getDrivers,
   });
 };
