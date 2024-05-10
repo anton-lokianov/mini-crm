@@ -1,5 +1,5 @@
 import { api } from "./api-config";
-import { AuthUser, SignInResponse, User } from "@/lib/types/globalTypes";
+import { AuthUser, Driver, SignInResponse, User } from "@/lib/types/globalTypes";
 
 export const signIn = async ({
   userName,
@@ -147,6 +147,24 @@ export const updateUserDetails = async (
     return response.data;
   } catch (error) {
     console.error("updateUserDetails error: ", error);
+    throw error;
+  }
+};
+
+export const getDrivers = async (): Promise<Driver[]> => {
+  try {
+    const response = await api.get("/driver/getAllDrivers");
+
+    if (response.status !== 200) {
+      console.error(
+        `getDrivers failed with status: ${response.status} and statusText: ${response.statusText}`
+      );
+      throw new Error(`Failed to get drivers: ${response.statusText}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("getDrivers error: ", error);
     throw error;
   }
 };

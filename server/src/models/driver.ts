@@ -4,7 +4,6 @@ interface IDriver extends Document {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  id: number;
   carNumber: string;
   shifts: Schema.Types.ObjectId[];
   status: string;
@@ -13,7 +12,7 @@ interface IDriver extends Document {
   author: Schema.Types.ObjectId;
   shiftStartTime: string;
   shiftEndTime: string;
-  livingArea: string;
+  workingArea: string;
   city: string;
 }
 
@@ -24,7 +23,6 @@ const driverSchema = new Schema<IDriver>(
     lastName: { type: String, required: true, trim: true, minlength: 2 },
     phoneNumber: { type: String, required: true, trim: true, minlength: 10 },
     city: { type: String, required: true, trim: true, minlength: 2 },
-    id: { type: Number, required: true, minlength: 9 },
     carNumber: { type: String, required: true, minlength: 2 },
     shifts: [{ type: Schema.Types.ObjectId, ref: "shift" }],
     status: { type: String, enum: ["active", "inactive"], default: "inactive" },
@@ -33,7 +31,7 @@ const driverSchema = new Schema<IDriver>(
       enum: ["tow-driver", "delivery-driver", "repair-driver"],
       required: true,
     },
-    livingArea: {
+    workingArea: {
       type: String,
       enum: ["north", "south", "center"],
       required: true,

@@ -64,7 +64,10 @@ const getAllDrivers = async (
       throw new UnauthorizedError("User not found");
     }
 
-    const drivers = await Driver.find({ author: user.id });
+    const drivers = await Driver.find(
+      { author: user.id },
+      "-author -__v -updatedAt -shifts -createdAt -phone -city -shiftStartTime -shiftEndTime"
+    );
 
     res.status(200).json({ drivers });
   } catch (error) {

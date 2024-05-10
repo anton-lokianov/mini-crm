@@ -21,3 +21,14 @@ export interface User {
 }
 
 export type Role = "admin" | "manager" | "operator" | "service";
+
+export interface Driver {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  carNumber: string;
+  status: string;
+  employeeType: string;
+  factorNumber: number;
+  workingArea: string;
+}
