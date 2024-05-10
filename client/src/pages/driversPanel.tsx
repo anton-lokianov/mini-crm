@@ -1,7 +1,11 @@
-import React from "react";
+import { DriversTable } from "@/components/driverPanel/driversTable";
 
 const DriversPanel = () => {
-  return <div>DriversPanel</div>;
+  return (
+    <section className="p-10">
+      <DriversTable />
+    </section>
+  );
 };
 
 export default DriversPanel;
