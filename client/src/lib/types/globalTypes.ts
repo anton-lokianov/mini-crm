@@ -29,6 +29,6 @@ export interface Driver {
   carNumber: string;
   status: string;
   employeeType: string;
-  factorNumber: number;
+  factorNumber: string;
   workingArea: string;
 }

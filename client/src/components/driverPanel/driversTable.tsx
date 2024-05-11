@@ -11,14 +11,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -38,13 +32,9 @@ import {
 import { SelectTrigger } from "@radix-ui/react-select";
 
 import { data, columns } from "./columnsData";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 export function DriversTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -54,7 +44,6 @@ export function DriversTable() {
     data,
     columns,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -63,7 +52,6 @@ export function DriversTable() {
     onRowSelectionChange: setRowSelection,
     state: {
       sorting,
-      columnFilters,
       columnVisibility,
       rowSelection,
     },
@@ -77,23 +65,21 @@ export function DriversTable() {
           placeholder={`Search by ${
             selectFilter ? selectFilter : "selected filter"
           }`}
-          value={
-            selectFilter
-              ? (table.getColumn(selectFilter)?.getFilterValue() as string)
-              : ""
-          }
-          onChange={(event) =>
-            table.getColumn(selectFilter)?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            table.getColumn(selectFilter)?.setFilterValue(event.target.value);
+          }}
           className="max-w-sm"
         />
-        <Select onValueChange={(value) => setSelectFilter(value)}>
+        <Select
+          onValueChange={(value) => setSelectFilter(value)}
+          value={selectFilter}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a filter" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectItem value="factorNumber">Factor number</SelectItem>
+              <SelectItem value="fullName">Driver name</SelectItem>
               <SelectItem value="carNumber">Car number</SelectItem>
               <SelectItem value="employeeType">Employee type</SelectItem>
               <SelectItem value="status">Status</SelectItem>
@@ -101,33 +87,7 @@ export function DriversTable() {
             </SelectGroup>
           </SelectContent>
         </Select>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {/* need to add a menu here */}
       </div>
       <div className="rounded-md border">
         <Table>
@@ -154,8 +114,7 @@ export function DriversTable() {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                  data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
@@ -170,8 +129,7 @@ export function DriversTable() {
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                  className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -180,25 +138,19 @@ export function DriversTable() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
         <div className="space-x-2">
           <Button
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
+            disabled={!table.getCanPreviousPage()}>
             Previous
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
+            disabled={!table.getCanNextPage()}>
             Next
           </Button>
         </div>

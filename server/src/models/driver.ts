@@ -8,7 +8,7 @@ interface IDriver extends Document {
   shifts: Schema.Types.ObjectId[];
   status: string;
   employeeType: string;
-  factorNumber: number;
+  factorNumber: string;
   author: Schema.Types.ObjectId;
   shiftStartTime: string;
   shiftEndTime: string;
@@ -36,7 +36,7 @@ const driverSchema = new Schema<IDriver>(
       enum: ["north", "south", "center"],
       required: true,
     },
-    factorNumber: { type: Number, required: true },
+    factorNumber: { type: String, required: true },
     shiftStartTime: { type: String, required: true },
     shiftEndTime: { type: String, required: true },
   },

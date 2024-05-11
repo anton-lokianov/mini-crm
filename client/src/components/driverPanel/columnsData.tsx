@@ -1,4 +1,4 @@
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, Play, Power, X } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
 import { Checkbox } from "../ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { Driver } from "@/lib/types/globalTypes";
-import { access } from "fs";
+import { cn } from "@/lib/utils";
 
 export const data: Driver[] = [
   {
@@ -21,50 +21,38 @@ export const data: Driver[] = [
     carNumber: "12345621",
     status: "active",
     employeeType: "tow-driver",
-    factorNumber: 123,
+    factorNumber: "123",
     workingArea: "north",
+  },
+  {
+    _id: "3u1rsdasv4",
+    firstName: "aaron",
+    lastName: "Doe",
+    carNumber: "1224786",
+    status: "inactive",
+    employeeType: "delivery-driver",
+    factorNumber: "88",
+    workingArea: "south",
   },
   {
     _id: "3u1reuv4",
     firstName: "John",
     lastName: "Doe",
     carNumber: "1224786",
-    status: "inactive",
+    status: "active",
     employeeType: "repair-driver",
-    factorNumber: 88,
+    factorNumber: "128",
     workingArea: "center",
   },
 ];
 
 export const columns: ColumnDef<Driver>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "firstName",
+    accessorFn: (row) => `${row.firstName} ${row.lastName}`,
+    id: "fullName",
     header: "Driver Name",
     cell: ({ row }) => {
-      console.log(row.getValue("firstName"));
-      <div className="capitalize">{row.getValue("firstName")}</div>;
+      return <div className="capitalize">{row.getValue("fullName")}</div>;
     },
   },
   {
@@ -84,13 +72,48 @@ export const columns: ColumnDef<Driver>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => <div>{row.getValue("status")}</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="p-0 px-[0.5rem]"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div
+        className={cn("text-red-500", {
+          "text-green-500": row.getValue("status") === "active",
+        })}>
+        {row.getValue("status")}
+      </div>
+    ),
   },
   {
     accessorKey: "carNumber",
     header: "Car number",
     cell: ({ row }) => <div>{row.getValue("carNumber")}</div>,
+  },
+  {
+    id: "shiftControl",
+    header: "Shift control",
+    cell: ({ row }) => {
+      const status = row.getValue("status");
+
+      return (
+        <Button
+          className={cn("text-red-500 hover:text-red-500/80 ml-5", {
+            "text-green-500 hover:text-green-500/80": status === "inactive",
+          })}
+          size="icon"
+          variant="ghost">
+          {status === "active" ? <Power /> : <Play />}
+        </Button>
+      );
+    },
   },
   {
     id: "actions",

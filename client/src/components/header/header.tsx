@@ -34,9 +34,9 @@ const Header = () => {
             </h2>
             <Button
               onClick={() => openOverlay(<Sidebar />, "sheet")}
-              size="sm"
+              size="icon"
               variant="ghost"
-              className="absolute left-1">
+              className="absolute left-2">
               <Menu />
             </Button>
             <UserDetails

@@ -77,11 +77,6 @@ export function RoadCallTable() {
           placeholder={`Search by ${
             selectFilter ? selectFilter : "selected filter"
           }`}
-          value={
-            selectFilter
-              ? (table.getColumn(selectFilter)?.getFilterValue() as string)
-              : ""
-          }
           onChange={(event) =>
             table.getColumn(selectFilter)?.setFilterValue(event.target.value)
           }
